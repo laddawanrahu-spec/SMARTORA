@@ -1,410 +1,1440 @@
 <!DOCTYPE html>
 <html lang="th" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SMARTORA — Your Invisible Protection</title>
-  
-  <!-- Google Fonts: Prompt & Plus Jakarta Sans -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Prompt', 'Plus Jakarta Sans', 'sans-serif'],
-            display: ['Plus Jakarta Sans', 'Prompt', 'sans-serif'],
-          },
-          colors: {
-            brand: {
-              50: '#f0f9ff',
-              100: '#e0f2fe',
-              200: '#bae6fd',
-              300: '#7dd3fc',
-              400: '#38bdf8',
-              500: '#0ea5e9',
-              600: '#0284c7',
-              700: '#0369a1',
-              800: '#075985',
-              900: '#0c4a6e',
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMARTORA — Your Invisible Protection</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Prompt & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#F0F9FF',
+                            100: '#E0F2FE',
+                            200: '#BAE6FD',
+                            300: '#7DD3FC',
+                            400: '#38BDF8',
+                            500: '#0EA5E9', // Sky primary
+                            600: '#0284C7', // Sky dark accent
+                            700: '#0369A1',
+                            800: '#075985',
+                            900: '#0C4A6E',
+                            dark: '#0F172A', // Deep navy
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Prompt', 'Plus Jakarta Sans', 'sans-serif'],
+                        english: ['Plus Jakarta Sans', 'Prompt', 'sans-serif'],
+                    }
+                }
             }
-          },
-          boxShadow: {
-            'phone': '0 25px 50px -12px rgba(2, 132, 199, 0.18), 0 0 0 8px #ffffff, 0 0 0 10px #bae6fd',
-            'soft': '0 10px 30px -5px rgba(14, 165, 233, 0.1)',
-          }
         }
-      }
-    }
-  </script>
+    </script>
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #FFFFFF;
+            color: #1E293B;
+            overflow-x: hidden;
+        }
+        
+        /* Pulse Animation Effects */
+        @keyframes ring-pulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.15); opacity: 0.3; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+        .pulse-ring {
+            animation: ring-pulse 3s infinite ease-in-out;
+        }
 
-  <style>
-    body {
-      font-family: 'Prompt', 'Plus Jakarta Sans', sans-serif;
-      background-color: #f8fafc;
-      color: #0f172a;
-    }
-    .glass-nav {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-    .hero-gradient {
-      background: radial-gradient(circle at 80% 20%, #e0f2fe 0%, #f0f9ff 45%, #ffffff 100%);
-    }
-    .phone-scroll::-webkit-scrollbar {
-      width: 4px;
-    }
-    .phone-scroll::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 9999px;
-    }
-    @keyframes floatSlow {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-    .animate-float {
-      animation: floatSlow 4s ease-in-out infinite;
-    }
-    @keyframes pulseRing {
-      0% { transform: scale(0.95); opacity: 0.7; }
-      70% { transform: scale(1.25); opacity: 0; }
-      100% { transform: scale(1.25); opacity: 0; }
-    }
-    .pulse-ring::before {
-      content: '';
-      position: absolute;
-      inset: -8px;
-      border-radius: 9999px;
-      border: 2px solid #38bdf8;
-      animation: pulseRing 2.5s infinite;
-    }
-  </style>
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+            animation: float-slow 4s infinite ease-in-out;
+        }
+
+        /* Glassmorphism background */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(224, 242, 254, 0.8);
+        }
+
+        /* Phone Screen Transitions */
+        .phone-screen-fade {
+            transition: all 0.3s ease-in-out;
+        }
+        
+        /* Hide scrollbars for clean mockups */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
 </head>
-<body class="antialiased selection:bg-brand-500 selection:text-white">
+<body class="bg-white text-slate-800 antialiased selection:bg-brand-500 selection:text-white">
 
-  <!-- Toast Notification -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3 text-sm font-medium">
-    <span id="toast-icon" class="w-6 h-6 rounded-full bg-brand-500 flex items-center justify-center text-white text-xs">✓</span>
-    <span id="toast-message">ดำเนินการสำเร็จ</span>
-  </div>
-
-  <!-- Navigation Bar -->
-  <header class="sticky top-0 z-40 glass-nav border-b border-brand-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-3.5 flex items-center justify-between">
-      <!-- Brand Logo -->
-      <a href="#" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center text-white shadow-md shadow-brand-500/25 group-hover:scale-105 transition">
-          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c-4.5 3-7 7.5-7 12 3.5 0 6.5-1.5 8-4.5 1.5 3 4.5 4.5 8 4.5 0-4.5-2.5-9-9-12z"/>
-          </svg>
-        </div>
-        <div>
-          <span class="font-display font-extrabold text-xl tracking-wide text-brand-900 block leading-none">SMARTORA</span>
-          <span class="text-[11px] text-brand-600 font-medium">Your Invisible Protection.</span>
-        </div>
-      </a>
-
-      <!-- Desktop Menu -->
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-        <a href="#overview" class="hover:text-brand-600 transition">ภาพรวมเทคโนโลยี</a>
-        <a href="#care-app" class="hover:text-brand-600 transition">Smartora Care</a>
-        <a href="#senior-app" class="hover:text-brand-600 transition">Smartora Senior</a>
-        <a href="#features" class="hover:text-brand-600 transition">จุดเด่นระบบ</a>
-      </nav>
-
-      <!-- CTA Button -->
-      <div class="flex items-center gap-3">
-        <a href="#care-app" class="bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium px-5 py-2.5 rounded-full shadow-md shadow-brand-600/20 transition transform hover:-translate-y-0.5">
-          ทดลองเล่นแอป
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section id="overview" class="hero-gradient pt-12 pb-20 lg:pt-20 lg:pb-28 overflow-hidden border-b border-brand-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid lg:grid-cols-12 gap-12 items-center">
-        
-        <!-- Left Copy -->
-        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-brand-200 shadow-sm text-brand-700 text-xs sm:text-sm font-medium">
-            <span class="w-2 h-2 rounded-full bg-brand-500 animate-ping"></span>
-            นวัตกรรมสายรัดข้อมืออัจฉริยะเพื่อผู้สูงอายุและครอบครัว
-          </div>
-
-          <h1 class="text-3xl sm:text-5xl lg:text-[52px] font-bold text-slate-900 leading-tight">
-            “เทคโนโลยีที่มองไม่เห็น<br/>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-sky-400">แต่ความห่วงใยอยู่ใกล้เสมอ”</span>
-          </h1>
-
-          <p class="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-            <strong>SMARTORA</strong> ดูแลทุกก้าวของคนที่คุณรักด้วยเทคโนโลยีอัจฉริยะ เชื่อมต่อข้อมูลสุขภาพ ตำแหน่ง GPS กล้องวงจรปิด และระบบแจ้งเตือนฉุกเฉินอัตโนมัติแบบเรียลไทม์ ใช้งานง่ายทั้งสำหรับผู้สูงอายุและผู้ดูแล
-          </p>
-
-          <!-- 5 Core Sensors Badges -->
-          <div class="pt-2">
-            <p class="text-xs font-semibold uppercase tracking-wider text-brand-700 mb-3">ฟังก์ชันตรวจจับอัจฉริยะครบวงจร</p>
-            <div class="flex flex-wrap justify-center lg:justify-start gap-3">
-              <div class="flex items-center gap-2 bg-white px-4 py-2.5 rounded-2xl border border-brand-100 shadow-sm">
-                <span class="w-8 h-8 rounded-xl bg-rose-50 text-rose-500 flex items-center justify-center">❤️</span>
-                <span class="text-sm font-semibold text-slate-700">ชีพจร</span>
-              </div>
-              <div class="flex items-center gap-2 bg-white px-4 py-2.5 rounded-2xl border border-brand-100 shadow-sm">
-                <span class="w-8 h-8 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center">🩸</span>
-                <span class="text-sm font-semibold text-slate-700">ความดัน</span>
-              </div>
-              <div class="flex items-center gap-2 bg-white px-4 py-2.5 rounded-2xl border border-brand-100 shadow-sm">
-                <span class="w-8 h-8 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center">📍</span>
-                <span class="text-sm font-semibold text-slate-700">GPS</span>
-              </div>
-              <div class="flex items-center gap-2 bg-white px-4 py-2.5 rounded-2xl border border-brand-100 shadow-sm">
-                <span class="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">📹</span>
-                <span class="text-sm font-semibold text-slate-700">กล้อง</span>
-              </div>
-              <div class="flex items-center gap-2 bg-white px-4 py-2.5 rounded-2xl border border-rose-200 shadow-sm">
-                <span class="w-8 h-8 rounded-xl bg-rose-500 text-white flex items-center justify-center font-bold text-xs">SOS</span>
-                <span class="text-sm font-semibold text-rose-600">ฉุกเฉิน</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Visual: Smartora Wristband Showcase -->
-        <div class="lg:col-span-5 flex justify-center">
-          <div class="relative w-full max-w-md bg-white/80 backdrop-blur-md rounded-[2.5rem] p-8 border border-brand-100 shadow-soft text-center">
-            <div class="absolute -top-4 right-6 bg-brand-600 text-white text-xs font-semibold px-4 py-1.5 rounded-full shadow-md">
-              Smartora Band Gen 2
-            </div>
-
-            <!-- Stylized Smart Wristband SVG Illustration -->
-            <div class="relative mx-auto w-60 h-60 flex items-center justify-center animate-float">
-              <div class="pulse-ring relative w-44 h-44 rounded-full bg-gradient-to-b from-brand-50 to-white border border-brand-200 flex items-center justify-center shadow-inner">
-                <svg class="w-40 h-40 drop-shadow-lg" viewBox="0 0 200 200" fill="none">
-                  <!-- White Textured Strap -->
-                  <path d="M55 65 C55 25, 145 25, 145 65 L152 125 C152 165, 48 165, 48 125 Z" fill="#FFFFFF" stroke="#BAE6FD" stroke-width="3"/>
-                  <path d="M58 75 Q100 88 142 75" stroke="#E0F2FE" stroke-width="2" stroke-dasharray="4 4"/>
-                  <path d="M54 115 Q100 128 146 115" stroke="#E0F2FE" stroke-width="2" stroke-dasharray="4 4"/>
-                  <!-- Metallic Sky-Silver Clasp -->
-                  <rect x="68" y="82" width="64" height="30" rx="12" fill="url(#claspGrad)" stroke="#7DD3FC" stroke-width="2"/>
-                  <!-- Engraved Leaf Logo -->
-                  <path d="M100 89 C93 93, 90 99, 90 105 C95 105, 98 103, 100 99 C102 103, 105 105, 110 105 C110 99, 107 93, 100 89 Z" fill="#0284C7"/>
-                  <!-- Elegant Charm Accent -->
-                  <circle cx="88" cy="115" r="3" fill="#94A3B8"/>
-                  <path d="M88 118 L88 134 M82 126 L94 126" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
-                  <circle cx="88" cy="126" r="3.5" fill="#38BDF8"/>
-                  <defs>
-                    <linearGradient id="claspGrad" x1="68" y1="82" x2="132" y2="112" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#F8FAFC"/>
-                      <stop offset="0.5" stop-color="#E0F2FE"/>
-                      <stop offset="1" stop-color="#BAE6FD"/>
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-            </div>
-
-            <div class="mt-4 space-y-1">
-              <h3 class="font-bold text-slate-800 text-lg">ดีไซน์เรียบหรู สวมใส่สบายตลอดวัน</h3>
-              <p class="text-xs text-slate-500">กันน้ำ IP68 • แบตเตอรี่ใช้งานได้นาน 14 วัน • ตรวจจับการล้มอัตโนมัติ</p>
-            </div>
-
-            <!-- Live mini status pill -->
-            <div class="mt-5 bg-brand-50/80 border border-brand-100 rounded-2xl p-3 flex items-center justify-around text-xs">
-              <div>
-                <span class="text-slate-400 block">สถานะการเชื่อมต่อ</span>
-                <span class="font-semibold text-brand-700 flex items-center justify-center gap-1 mt-0.5">
-                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span> ออนไลน์ปกติ
-                </span>
-              </div>
-              <div class="h-7 w-px bg-brand-200"></div>
-              <div>
-                <span class="text-slate-400 block">ชีพจรล่าสุด</span>
-                <span class="font-bold text-slate-800 mt-0.5 block">78 BPM</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 1: SMARTORA CARE (สำหรับลูกหลานและผู้ดูแล) -->
-  <section id="care-app" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <!-- Section Header -->
-      <div class="text-center max-w-3xl mx-auto mb-14">
-        <div class="inline-flex items-center gap-2.5 bg-brand-600 text-white px-6 py-2 rounded-full shadow-md shadow-brand-600/20 mb-4">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
-          </svg>
-          <span class="font-bold tracking-wide text-sm sm:text-base">SMARTORA CARE</span>
-        </div>
-        <h2 class="text-2xl sm:text-4xl font-bold text-slate-900">แอปพลิเคชันสำหรับลูกหลานและผู้ดูแล</h2>
-        <p class="text-slate-500 mt-3 text-sm sm:text-base">
-          คลิกเลือกหน้าจอทั้ง 8 ฟังก์ชันด้านขวา เพื่อจำลองการใช้งานจริงบนหน้าจอมือถือด้านซ้าย
-        </p>
-      </div>
-
-      <!-- Interactive Simulator Grid -->
-      <div class="grid lg:grid-cols-12 gap-10 items-start">
-        
-        <!-- Left: Interactive Mobile Mockup -->
-        <div class="lg:col-span-5 flex flex-col items-center">
-          <div class="w-[320px] sm:w-[340px] h-[660px] bg-slate-50 rounded-[2.8rem] shadow-phone border border-brand-200 overflow-hidden flex flex-col relative">
+    <!-- 1. STICKY NAVBAR -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-sky-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             
-            <!-- Status Bar -->
-            <div class="bg-white px-6 pt-3 pb-2 flex items-center justify-between text-[11px] font-bold text-slate-800 shrink-0">
-              <span>9:41</span>
-              <div class="w-20 h-4 bg-slate-900 rounded-full"></div>
-              <div class="flex items-center gap-1">
-                <span>5G</span>
-                <div class="w-4 h-2.5 border border-slate-800 rounded-sm p-0.5">
-                  <div class="bg-slate-800 h-full w-full"></div>
+            <!-- Logo SMARTORA -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-brand-600 via-brand-500 to-sky-300 flex items-center justify-center shadow-lg shadow-brand-500/25 group-hover:scale-105 transition-transform">
+                    <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
                 </div>
-              </div>
-            </div>
+                <div>
+                    <span class="text-2xl font-extrabold font-english tracking-tight bg-gradient-to-r from-brand-900 via-brand-600 to-brand-500 bg-clip-text text-transparent">SMARTORA</span>
+                    <span class="block text-[10px] font-medium tracking-widest text-brand-600 uppercase font-english -mt-1">Your Invisible Protection</span>
+                </div>
+            </a>
 
-            <!-- Dynamic Screen Container -->
-            <div id="care-screen-content" class="flex-1 overflow-y-auto phone-scroll bg-slate-50 p-4 space-y-3.5">
-              <!-- Content injected by JS -->
-            </div>
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+                <a href="#hero" class="hover:text-brand-600 transition-colors">หน้าแรก</a>
+                <a href="#features" class="hover:text-brand-600 transition-colors">ฟีเจอร์หลัก</a>
+                <a href="#care-simulator" class="hover:text-brand-600 transition-colors flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-brand-500"></span> SMARTORA Care
+                </a>
+                <a href="#senior-simulator" class="hover:text-brand-600 transition-colors flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span> สำหรับผู้สูงอายุ
+                </a>
+                <a href="#why-us" class="hover:text-brand-600 transition-colors">จุดเด่น</a>
+            </nav>
 
-            <!-- Bottom Navigation Bar -->
-            <div class="bg-white border-t border-slate-100 px-3 py-2.5 flex items-center justify-around text-[10px] font-medium text-slate-400 shrink-0">
-              <button onclick="switchCareScreen(1)" id="nav-btn-1" class="care-nav-item flex flex-col items-center gap-1 text-brand-600 font-semibold">
-                <span class="text-base">🏠</span>
-                <span>หน้าหลัก</span>
-              </button>
-              <button onclick="switchCareScreen(2)" id="nav-btn-2" class="care-nav-item flex flex-col items-center gap-1 hover:text-brand-600">
-                <span class="text-base">💓</span>
-                <span>สุขภาพ</span>
-              </button>
-              <button onclick="switchCareScreen(3)" id="nav-btn-3" class="care-nav-item flex flex-col items-center gap-1 hover:text-brand-600">
-                <span class="text-base">📍</span>
-                <span>ตำแหน่ง</span>
-              </button>
-              <button onclick="switchCareScreen(6)" id="nav-btn-6" class="care-nav-item flex flex-col items-center gap-1 hover:text-brand-600">
-                <span class="text-base">💊</span>
-                <span>เตือนยา</span>
-              </button>
-              <button onclick="switchCareScreen(8)" id="nav-btn-8" class="care-nav-item flex flex-col items-center gap-1 hover:text-brand-600">
-                <span class="text-base">📊</span>
-                <span>รายงาน</span>
-              </button>
+            <!-- CTA Button -->
+            <div class="flex items-center gap-3">
+                <a href="#care-simulator" class="bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white font-medium px-5 py-2.5 rounded-full shadow-md shadow-brand-500/20 hover:shadow-lg hover:shadow-brand-500/35 transition-all text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                    <span>ทดลองใช้งานหน้าจอ</span>
+                </a>
             </div>
-          </div>
+        </div>
+    </header>
 
-          <p id="current-screen-caption" class="mt-5 text-sm font-semibold text-brand-700 bg-brand-50 px-4 py-1.5 rounded-full border border-brand-200">
-            กำลังแสดง: 1. หน้าหลัก Dashboard
-          </p>
+    <!-- 2. HERO SECTION -->
+    <section id="hero" class="relative pt-12 pb-20 md:py-24 overflow-hidden bg-gradient-to-b from-brand-50 via-white to-sky-50/50">
+        <!-- Background Tech Waves Overlay -->
+        <div class="absolute inset-0 pointer-events-none opacity-40">
+            <svg class="w-full h-full" viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M-100 200 C300 400 600 100 1500 300" stroke="url(#sky-gradient-1)" stroke-width="2" stroke-dasharray="6 6"/>
+                <path d="M-50 500 C400 200 800 600 1600 400" stroke="url(#sky-gradient-2)" stroke-width="1.5"/>
+                <defs>
+                    <linearGradient id="sky-gradient-1" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.2"/>
+                        <stop offset="50%" stop-color="#0EA5E9" stop-opacity="0.5"/>
+                        <stop offset="100%" stop-color="#0284C7" stop-opacity="0.1"/>
+                    </linearGradient>
+                    <linearGradient id="sky-gradient-2" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#E0F2FE" stop-opacity="0.8"/>
+                        <stop offset="100%" stop-color="#0EA5E9" stop-opacity="0.3"/>
+                    </linearGradient>
+                </defs>
+            </svg>
         </div>
 
-        <!-- Right: 8 Screens Selector Cards -->
-        <div class="lg:col-span-7">
-          <div class="grid sm:grid-cols-2 gap-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Left Content -->
+                <div class="lg:col-span-7 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-100/80 border border-brand-200 text-brand-700 text-xs sm:text-sm font-semibold mb-6 shadow-sm">
+                        <span class="w-2.5 h-2.5 rounded-full bg-brand-500 animate-ping"></span>
+                        <span>SMARTORA CARE & SENIOR SYSTEM</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight mb-4">
+                        <span class="font-english tracking-tight bg-gradient-to-r from-brand-900 via-brand-600 to-brand-500 bg-clip-text text-transparent">SMARTORA</span>
+                    </h1>
+                    
+                    <p class="text-xl sm:text-2xl font-medium text-brand-600 font-english italic mb-4">
+                        "Your Invisible Protection."
+                    </p>
+
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 mb-6 leading-snug">
+                        “เทคโนโลยีที่มองไม่เห็น แต่ความห่วงใยอยู่ใกล้เสมอ”
+                    </h2>
+
+                    <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 mb-8 font-light leading-relaxed">
+                        ระบบนิเวศดูแลสุขภาพผู้สูงอายุอัจฉริยะ เชื่อมต่อสายรัดข้อมือเพื่อสุขภาพเข้ากับแอปพลิเคชันสำหรับลูกหลานและผู้สูงอายุ แจ้งเตือนเหตุฉุกเฉินและการล้มแบบเรียลไทม์ พร้อมติดตามค่าสุขภาพตลอด 24 ชั่วโมง
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#care-simulator" class="w-full sm:w-auto bg-brand-500 hover:bg-brand-600 text-white font-semibold px-8 py-4 rounded-2xl shadow-lg shadow-brand-500/30 hover:shadow-brand-500/40 transition-all text-center flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-laptop-code text-lg"></i>
+                            <span>จำลองการใช้งานแอปพลิเคชัน</span>
+                        </a>
+                        <button onclick="scrollToFeatures()" class="w-full sm:w-auto bg-white border border-slate-200 hover:border-brand-300 text-slate-700 hover:text-brand-600 font-medium px-6 py-4 rounded-2xl shadow-sm hover:shadow transition-all text-center flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-circle-play text-brand-500"></i>
+                            <span>สำรวจฟีเจอร์หลัก</span>
+                        </button>
+                    </div>
+
+                    <!-- Heartbeat & Status Banner -->
+                    <div class="mt-10 p-4 rounded-2xl bg-white/70 backdrop-blur border border-sky-100 flex items-center justify-around max-w-lg mx-auto lg:mx-0 shadow-sm">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-500 flex items-center justify-center">
+                                <i class="fa-solid fa-heart-pulse animate-bounce"></i>
+                            </div>
+                            <div class="text-left">
+                                <div class="text-xs text-slate-500">ชีพจรเฉลี่ย</div>
+                                <div class="text-base font-bold text-slate-800">78 BPM <span class="text-xs text-emerald-500 font-normal">ปกติ</span></div>
+                            </div>
+                        </div>
+                        <div class="h-8 w-px bg-slate-200"></div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-500 flex items-center justify-center">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <div class="text-left">
+                                <div class="text-xs text-slate-500">สถานะความปลอดภัย</div>
+                                <div class="text-base font-bold text-emerald-600">ปลอดภัย 100%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Right Content: Smart Wristband Visual with Animated Pulse Rings -->
+                <div class="lg:col-span-5 flex justify-center relative">
+                    
+                    <!-- SVG Animated Smart Band Graphic Container -->
+                    <div class="relative w-full max-w-md aspect-square flex items-center justify-center">
+                        
+                        <!-- Pulse Rings Background -->
+                        <div class="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full border-2 border-brand-300/40 pulse-ring"></div>
+                        <div class="absolute w-60 h-60 sm:w-80 sm:h-80 rounded-full border border-sky-400/30 pulse-ring" style="animation-delay: 1s;"></div>
+                        <div class="absolute w-48 h-48 sm:w-64 sm:h-64 rounded-full bg-gradient-to-tr from-brand-100/60 to-white/80 blur-xl"></div>
+
+                        <!-- Top Floating Badge -->
+                        <div class="absolute -top-2 bg-white/90 backdrop-blur border border-brand-200 px-4 py-2 rounded-2xl shadow-xl flex items-center gap-2 z-20 animate-float">
+                            <div class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
+                            <span class="text-xs sm:text-sm font-semibold text-slate-800">ดูแลทุกก้าวของคนที่คุณรัก ด้วยเทคโนโลยีอัจฉริยะ</span>
+                        </div>
+
+                        <!-- Smart Band Graphic Render (Pure SVG/CSS Modern Hardware) -->
+                        <div class="relative z-10 w-64 sm:w-72 h-64 sm:h-72 bg-gradient-to-br from-white via-slate-50 to-sky-50 rounded-full shadow-2xl border-4 border-white p-6 flex flex-col items-center justify-center text-center group hover:scale-105 transition-transform duration-500">
+                            
+                            <!-- Band Strap Simulation -->
+                            <div class="absolute -top-10 w-28 h-20 bg-gradient-to-b from-slate-200 via-slate-100 to-white rounded-t-3xl border-t-2 border-slate-300 opacity-90 shadow-inner"></div>
+                            <div class="absolute -bottom-10 w-28 h-20 bg-gradient-to-t from-slate-200 via-slate-100 to-white rounded-b-3xl border-b-2 border-slate-300 opacity-90 shadow-inner"></div>
+
+                            <!-- Screen Container -->
+                            <div class="w-48 h-48 rounded-full bg-slate-900 p-3 shadow-inner relative flex flex-col items-center justify-center text-white border-2 border-slate-700">
+                                
+                                <div class="text-[10px] text-sky-400 uppercase tracking-widest font-english mb-1">SMARTORA BAND</div>
+                                
+                                <div class="text-3xl font-extrabold text-white font-english tracking-wider">
+                                    09:41
+                                </div>
+                                <div class="text-[11px] text-slate-400 mb-3">จันทร์ 19 พ.ย.</div>
+
+                                <div class="flex items-center gap-3 bg-slate-800/80 px-3 py-1.5 rounded-full border border-slate-700">
+                                    <i class="fa-solid fa-heart-pulse text-rose-500 text-sm animate-pulse"></i>
+                                    <span class="text-xs font-bold text-white">78 <span class="text-[10px] text-slate-400 font-normal">BPM</span></span>
+                                    <span class="text-slate-600">|</span>
+                                    <i class="fa-solid fa-droplet text-sky-400 text-xs"></i>
+                                    <span class="text-xs font-bold text-white">98%</span>
+                                </div>
+
+                                <div class="mt-2 text-[10px] text-emerald-400 flex items-center gap-1">
+                                    <i class="fa-solid fa-circle-check text-[9px]"></i>
+                                    <span>สถานะปลอดภัย</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Feature Badges around the watch -->
+                        <div class="absolute -left-4 top-1/4 bg-white/95 backdrop-blur border border-sky-100 p-2.5 rounded-2xl shadow-lg flex items-center gap-2.5 animate-float" style="animation-delay: 0.5s;">
+                            <div class="w-8 h-8 rounded-xl bg-rose-500 text-white flex items-center justify-center text-xs shadow-md">
+                                <i class="fa-solid fa-heart-pulse"></i>
+                            </div>
+                            <span class="text-xs font-bold text-slate-700 pr-1">วัดชีพจร</span>
+                        </div>
+
+                        <div class="absolute -right-4 top-1/3 bg-white/95 backdrop-blur border border-sky-100 p-2.5 rounded-2xl shadow-lg flex items-center gap-2.5 animate-float" style="animation-delay: 1.5s;">
+                            <div class="w-8 h-8 rounded-xl bg-sky-500 text-white flex items-center justify-center text-xs shadow-md">
+                                <i class="fa-solid fa-gauge-high"></i>
+                            </div>
+                            <span class="text-xs font-bold text-slate-700 pr-1">วัดความดัน</span>
+                        </div>
+
+                        <div class="absolute left-2 bottom-6 bg-white/95 backdrop-blur border border-sky-100 p-2.5 rounded-2xl shadow-lg flex items-center gap-2.5 animate-float" style="animation-delay: 2s;">
+                            <div class="w-8 h-8 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-xs shadow-md">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <span class="text-xs font-bold text-slate-700 pr-1">GPS ติดตาม</span>
+                        </div>
+
+                        <div class="absolute right-2 bottom-12 bg-white/95 backdrop-blur border border-sky-100 p-2.5 rounded-2xl shadow-lg flex items-center gap-2.5 animate-float" style="animation-delay: 2.5s;">
+                            <div class="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center text-xs shadow-md">
+                                <i class="fa-solid fa-video"></i>
+                            </div>
+                            <span class="text-xs font-bold text-slate-700 pr-1">กล้อง CCTV</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 5 Feature Quick Bar at Hero Bottom -->
+        <div id="features" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
+                
+                <div class="bg-white p-4 rounded-2xl border border-sky-100 shadow-sm hover:shadow-md hover:border-brand-300 transition-all text-center flex flex-col items-center justify-center">
+                    <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-500 flex items-center justify-center text-xl mb-2">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <span class="text-sm font-bold text-slate-800">ชีพจร (Heart Rate)</span>
+                    <span class="text-[11px] text-slate-500 mt-0.5">ตรวจจับต่อเนื่อง 24ชม.</span>
+                </div>
+
+                <div class="bg-white p-4 rounded-2xl border border-sky-100 shadow-sm hover:shadow-md hover:border-brand-300 transition-all text-center flex flex-col items-center justify-center">
+                    <div class="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center text-xl mb-2">
+                        <i class="fa-solid fa-stethoscope"></i>
+                    </div>
+                    <span class="text-sm font-bold text-slate-800">ความดัน (Blood Pressure)</span>
+                    <span class="text-[11px] text-slate-500 mt-0.5">บันทึกและแจ้งเตือนวิกฤต</span>
+                </div>
+
+                <div class="bg-white p-4 rounded-2xl border border-sky-100 shadow-sm hover:shadow-md hover:border-brand-300 transition-all text-center flex flex-col items-center justify-center">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl mb-2">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                    </div>
+                    <span class="text-sm font-bold text-slate-800">GPS ติดตามตำแหน่ง</span>
+                    <span class="text-[11px] text-slate-500 mt-0.5">กำหนดขอบเขตพื้นที่ปลอดภัย</span>
+                </div>
+
+                <div class="bg-white p-4 rounded-2xl border border-sky-100 shadow-sm hover:shadow-md hover:border-brand-300 transition-all text-center flex flex-col items-center justify-center">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl mb-2">
+                        <i class="fa-solid fa-video"></i>
+                    </div>
+                    <span class="text-sm font-bold text-slate-800">กล้อง (CCTV)</span>
+                    <span class="text-[11px] text-slate-500 mt-0.5">เชื่อมต่อสตรีมสดในบ้าน</span>
+                </div>
+
+                <div class="col-span-2 sm:col-span-1 bg-white p-4 rounded-2xl border border-sky-100 shadow-sm hover:shadow-md hover:border-brand-300 transition-all text-center flex flex-col items-center justify-center">
+                    <div class="w-12 h-12 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-xl mb-2">
+                        <i class="fa-solid fa-triangle-exclamation animate-pulse"></i>
+                    </div>
+                    <span class="text-sm font-bold text-slate-800">SOS แจ้งเตือนฉุกเฉิน</span>
+                    <span class="text-[11px] text-slate-500 mt-0.5">ตรวจจับการล้มทันที</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. SMARTORA CARE SECTION (สำหรับลูกหลานและผู้ดูแล - 8 Interactive Screens) -->
+    <section id="care-simulator" class="py-20 bg-slate-50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <!-- Card 1 -->
-            <button onclick="switchCareScreen(1)" data-screen="1" class="screen-card text-left p-4 rounded-2xl border-2 border-brand-500 bg-brand-50/60 transition hover:shadow-md">
-              <div class="flex items-center justify-between mb-1.5">
-                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-brand-600 text-white">หน้าจอที่ 1</span>
-                <span class="text-lg">🏠</span>
-              </div>
-              <h3 class="font-bold text-slate-900 text-base">1. หน้าหลัก Dashboard</h3>
-              <p class="text-xs text-slate-600 mt-1">สรุปสถานะความปลอดภัย ชีพจร ความดัน SpO₂ ตำแหน่งล่าสุด และปุ่มลัดฉุกเฉินในหน้าเดียว</p>
-            </button>
+            <!-- Section Header Banner -->
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-600 text-white text-sm font-semibold mb-4 shadow-md shadow-brand-500/20">
+                    <i class="fa-solid fa-users text-sm"></i>
+                    <span>SMARTORA CARE</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">
+                    ระบบสำหรับลูกหลานและผู้ดูแล
+                </h2>
+                <p class="text-slate-600 text-base sm:text-lg">
+                    ศูนย์รวมการดูแลแบบครบรอบด้าน คลิกเลือกดูหน้าจอการทำงานจริงทั้ง 8 เมนูในสมาร์ทโฟนด้านล่าง
+                </p>
+            </div>
 
-            <!-- Card 2 -->
-            <button onclick="switchCareScreen(2)" data-screen="2" class="screen-card text-left p-4 rounded-2xl border border-slate-200 bg-white hover:border-brand-300 transition hover:shadow-md">
-              <div class="flex items-center justify-between mb-1.5">
-                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-brand-100 text-brand-700">หน้าจอที่ 2</span>
-                <span class="text-lg">📈</span>
-              </div>
-              <h3 class="font-bold text-slate-900 text-base">2. หน้าข้อมูลสุขภาพ</h3>
-              <p class="text-xs text-slate-600 mt-1">กราฟวิเคราะห์แนวโน้มชีพจรเฉลี่ย ความดันโลหิต และออกซิเจนในเลือดแบบรายสัปดาห์/รายเดือน</p>
-            </button>
+            <!-- Main Interactive Simulator Layout -->
+            <div class="grid lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- LEFT: Big Phone Mockup Simulator -->
+                <div class="lg:col-span-5 flex flex-col items-center sticky top-24">
+                    
+                    <!-- Phone Frame -->
+                    <div class="relative w-[340px] sm:w-[370px] h-[720px] bg-slate-900 rounded-[50px] p-4 shadow-2xl border-4 border-slate-800 ring-1 ring-slate-900/50">
+                        
+                        <!-- Phone Notch / Dynamic Island -->
+                        <div class="absolute top-6 left-1/2 -translate-x-1/2 w-32 h-5 bg-slate-900 rounded-full z-30 flex items-center justify-center">
+                            <div class="w-3 h-3 rounded-full bg-slate-950 mr-2 border border-slate-800"></div>
+                            <div class="w-2 h-2 rounded-full bg-slate-950"></div>
+                        </div>
 
-            <!-- Card 3 -->
-            <button onclick="switchCareScreen(3)" data-screen="3" class="screen-card text-left p-4 rounded-2xl border border-slate-200 bg-white hover:border-brand-300 transition hover:shadow-md">
-              <div class="flex items-center justify-between mb-1.5">
-                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-brand-100 text-brand-700">หน้าจอที่ 3</span>
-                <span class="text-lg">🗺️</span>
-              </div>
-              <h3 class="font-bold text-slate-900 text-base">3. หน้าติดตามตำแหน่ง GPS</h3>
-              <p class="text-xs text-slate-600 mt-1">ระบุพิกัดปัจจุบันแบบเรียลไทม์ กำหนดพื้นที่ปลอดภัย (Safe Zone) พร้อมระบบนำทาง</p>
-            </button>
+                        <!-- Phone Display Screen Inside -->
+                        <div class="w-full h-full bg-slate-100 rounded-[38px] overflow-hidden flex flex-col relative pt-7 font-sans text-slate-800 no-scrollbar overflow-y-auto" id="care-phone-display">
+                            
+                            <!-- Phone Top Status Bar -->
+                            <div class="px-6 pb-2 pt-1 flex justify-between items-center text-xs font-semibold text-slate-700 bg-white border-b border-slate-100 sticky top-0 z-20">
+                                <span>9:41</span>
+                                <div class="flex items-center gap-1.5 text-[10px]">
+                                    <i class="fa-solid fa-signal"></i>
+                                    <i class="fa-solid fa-wifi"></i>
+                                    <i class="fa-solid fa-battery-full text-xs"></i>
+                                </div>
+                            </div>
 
-            <!-- Card 4 -->
-            <button onclick="switchCareScreen(4)" data-screen="4" class="screen-card text-left p-4 rounded-2xl border border-slate-200 bg-white hover:border-brand-300 transition hover:shadow-md">
-              <div class="flex items-center justify-between mb-1.5">
-                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-brand-100 text-brand-700">หน้าจอที่ 4</span>
-                <span class="text-lg">📹</span>
-              </div>
-              <h3 class="font-bold text-slate-900 text-base">4. หน้ากล้องวงจรปิด CCTV</h3>
-              <p class="text-xs text-slate-600 mt-1">ดูภาพสดภายในบ้านแยกตามห้อง (หน้าบ้าน ห้องนั่งเล่น ห้องครัว) และดูย้อนหลังได้ทันที</p>
-            </button>
+                            <!-- SCREEN CONTENT AREA (Rendered via JS) -->
+                            <div id="care-screen-content" class="p-4 flex-1 pb-16">
+                                <!-- Default Screen 1 Content will load here -->
+                            </div>
 
-            <!-- Card 5 -->
-            <button onclick="switchCareScreen(5)" data-screen="5" class="screen-card text-left p-4 rounded-2xl border border-slate-200 bg-white hover:border-rose-300 transition hover:shadow-md">
-              <div class="flex items-center justify-between mb-1.5">
-                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700">หน้าจอที่ 5</span>
-                <span class="text-lg">🚨</span>
-              </div>
-              <h3 class="font-bold text-slate-900 text-base">5. หน้าแจ้งเตือนฉุกเฉิน</h3>
-              <p class="text-xs text-slate-600 mt-1">แจ้งเตือนทันทีเมื่อตรวจพบการหกล้มหรือกดปุ่ม SOS พร้อมระบุเวลา พิกัด และปุ่มโทรออกด่วน</p>
-            </button>
+                            <!-- Phone Bottom Bar Navigation -->
+                            <div class="absolute bottom-0 inset-x-0 bg-white/95 backdrop-blur border-t border-slate-200 py-2.5 px-4 flex justify-around text-slate-400 text-xs z-20">
+                                <button onclick="selectCareScreen(1)" id="nav-btn-1" class="flex flex-col items-center gap-1 text-brand-600">
+                                    <i class="fa-solid fa-house text-base"></i>
+                                    <span class="text-[9px]">หน้าหลัก</span>
+                                </button>
+                                <button onclick="selectCareScreen(2)" id="nav-btn-2" class="flex flex-col items-center gap-1 hover:text-brand-600">
+                                    <i class="fa-solid fa-heart-pulse text-base"></i>
+                                    <span class="text-[9px]">สุขภาพ</span>
+                                </button>
+                                <button onclick="selectCareScreen(3)" id="nav-btn-3" class="flex flex-col items-center gap-1 hover:text-brand-600">
+                                    <i class="fa-solid fa-location-dot text-base"></i>
+                                    <span class="text-[9px]">ตำแหน่ง</span>
+                                </button>
+                                <button onclick="selectCareScreen(4)" id="nav-btn-4" class="flex flex-col items-center gap-1 hover:text-brand-600">
+                                    <i class="fa-solid fa-video text-base"></i>
+                                    <span class="text-[9px]">กล้อง</span>
+                                </button>
+                                <button onclick="selectCareScreen(7)" id="nav-btn-7" class="flex flex-col items-center gap-1 hover:text-brand-600">
+                                    <i class="fa-solid fa-gear text-base"></i>
+                                    <span class="text-[9px]">ผู้ดูแล</span>
+                                </button>
+                            </div>
 
-            <!-- Card 6 -->
-            <button onclick="switchCareScreen(6)" data-screen="6" class="screen-card text-left p-4 rounded-2xl border border-slate-200 bg-white hover:border-brand-300 transition hover:shadow-md">
-              <div class="flex items-center justify-between mb-1.5">
-                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-brand-100 text-brand-700">หน้าจอที่ 6</span>
-                <span class="text-lg">💊</span>
-              </div>
-              <h3 class="font-bold text-slate-900 text-base">6. หน้าตารางเตือนยา</h3>
-              <p class="text-xs text-slate-600 mt-1">ติดตามสถานะการทานยาประจำวันของท่าน ทั้งมื้อเช้าและมื้อเย็น ลดปัญหาการลืมทานยา</p>
-            </button>
+                        </div>
+                    </div>
+                    
+                    <p class="text-xs text-slate-500 mt-4 flex items-center gap-1.5">
+                        <i class="fa-solid fa-hand-pointer text-brand-500"></i>
+                        <span>คลิกที่หน้าจอจำลองหรือการ์ดทางขวาเพื่อทดลองเปลี่ยนหน้า</span>
+                    </p>
+                </div>
 
-            <!-- Card 7 -->
-            <button onclick="switchCareScreen(7)" data-screen="7" class="screen-card text-left p-4 rounded-2xl border border-slate-200 bg-white hover:border-brand-300 transition hover:shadow-md">
-              <div class="flex items-center justify-between mb-1.5">
-                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-brand-100 text-brand-700">หน้าจอที่ 7</span>
-                <span class="text-lg">👨‍👩‍👧</span>
-              </div>
-              <h3 class="font-bold text-slate-900 text-base">7. หน้าจัดการผู้ดูแล</h3>
-              <p class="text-xs text-slate-600 mt-1">เพิ่มสมาชิกในครอบครัวหรือผู้ดูแลใกล้บ้าน พร้อมกำหนดสิทธิ์การเข้าถึงข้อมูลอย่างปลอดภัย</p>
-            </button>
+                <!-- RIGHT: 8 Screen Cards Selection Grid -->
+                <div class="lg:col-span-7">
+                    <div class="mb-4 flex items-center justify-between">
+                        <h3 class="text-xl font-bold text-slate-800">เลือกชมทั้ง 8 หน้าจอการทำงาน</h3>
+                        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-brand-100 text-brand-700">คลิกที่การ์ดเพื่อพรีวิว</span>
+                    </div>
 
-            <!-- Card 8 -->
-            <button onclick="switchCareScreen(8)" data-screen="8" class="screen-card text-left p-4 rounded-2xl border border-slate-200 bg-white hover:border-brand-300 transition hover:shadow-md">
-              <div class="flex items-center justify-between mb-1.5">
-                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-brand-100 text-brand-700">หน้าจอที่ 8</span>
-                <span class="text-lg">📋</span>
-              </div>
-              <h3 class="font-bold text-slate-900 text-base">8. หน้าประวัติและรายงาน</h3>
-              <p class="text-xs text-slate-600 mt-1">สรุปสุขภาพรายสัปดาห์และบันทึกเหตุการณ์สำคัญ สามารถดาวน์โหลดรายงานเพื่อปรึกษาแพทย์ได้</p>
-            </button>
+                    <div class="grid sm:grid-cols-2 gap-4" id="screen-cards-grid">
+                        
+                        <!-- Card 1 -->
+                        <div onclick="selectCareScreen(1)" id="card-1" class="care-card cursor-pointer p-4 rounded-2xl border-2 border-brand-500 bg-white shadow-md transition-all hover:scale-[1.02]">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-8 h-8 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center font-bold text-sm">1</div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800 text-sm">1. หน้าหลัก Dashboard</h4>
+                                    <span class="text-[11px] text-slate-500">สรุปข้อมูลสถานะความปลอดภัยและค่าสุขภาพ</span>
+                                </div>
+                            </div>
+                            <div class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                                • แสดงโปรไฟล์ผู้สูงอายุ + สถานะการเชื่อมต่อ<br>
+                                • ค่า Vital Signs สด: ชีพจร ความดัน SpO2<br>
+                                • ปุ่มลัดฉุกเฉินและกล้อง CCTV
+                            </div>
+                        </div>
 
-          </div>
+                        <!-- Card 2 -->
+                        <div onclick="selectCareScreen(2)" id="card-2" class="care-card cursor-pointer p-4 rounded-2xl border border-slate-200 bg-white hover:border-brand-300 hover:shadow-md transition-all hover:scale-[1.02]">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-8 h-8 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center font-bold text-sm">2</div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800 text-sm">2. หน้าข้อมูลสุขภาพ</h4>
+                                    <span class="text-[11px] text-slate-500">กราฟวิเคราะห์แนวโน้มสุขภาพย้อนหลัง</span>
+                                </div>
+                            </div>
+                            <div class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                                • สลับดูย้อนหลัง 7 วัน / 30 วัน / ทั้งหมด<br>
+                                • กราฟเส้นชีพจรและแนวโน้มความดัน<br>
+                                • ระดับออกซิเจนในเลือด SpO2
+                            </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div onclick="selectCareScreen(3)" id="card-3" class="care-card cursor-pointer p-4 rounded-2xl border border-slate-200 bg-white hover:border-brand-300 hover:shadow-md transition-all hover:scale-[1.02]">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-sm">3</div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800 text-sm">3. หน้าติดตามตำแหน่ง</h4>
+                                    <span class="text-[11px] text-slate-500">ระบบ GPS ป้องกันการหลงทาง</span>
+                                </div>
+                            </div>
+                            <div class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                                • แผนที่จำลองหมุดพิกัดเรียลไทม์<br>
+                                • กำหนด Safe Zone (รัศมีพื้นที่ปลอดภัย)<br>
+                                • ปุ่มกดนำทางไปยังตำแหน่งปัจจุบัน
+                            </div>
+                        </div>
+
+                        <!-- Card 4 -->
+                        <div onclick="selectCareScreen(4)" id="card-4" class="care-card cursor-pointer p-4 rounded-2xl border border-slate-200 bg-white hover:border-brand-300 hover:shadow-md transition-all hover:scale-[1.02]">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm">4</div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800 text-sm">4. หน้ากล้องวงจรปิด CCTV</h4>
+                                    <span class="text-[11px] text-slate-500">สตรีมสดภาพภายในบ้าน</span>
+                                </div>
+                            </div>
+                            <div class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                                • สลับกล้อง: หน้าบ้าน / ห้องนั่งเล่น / ห้องครัว<br>
+                                • แสดงป้ายสถานะ LIVE<br>
+                                • ระบบย้อนดูคลิปบันทึกเหตุการณ์
+                            </div>
+                        </div>
+
+                        <!-- Card 5 -->
+                        <div onclick="selectCareScreen(5)" id="card-5" class="care-card cursor-pointer p-4 rounded-2xl border border-slate-200 bg-white hover:border-brand-300 hover:shadow-md transition-all hover:scale-[1.02]">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-8 h-8 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-sm">5</div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800 text-sm">5. หน้าแจ้งเตือนฉุกเฉิน</h4>
+                                    <span class="text-[11px] text-slate-500">Emergency Alert เมื่อเกิดเหตุการล้ม</span>
+                                </div>
+                            </div>
+                            <div class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                                • การ์ดแจ้งเตือนการล้มสีแดงเด่นชัด<br>
+                                • แสดงเวลาและพิกัดจุดเกิดเหตุ<br>
+                                • ปุ่มโทรด่วนถึงผู้ดูแลทันที
+                            </div>
+                        </div>
+
+                        <!-- Card 6 -->
+                        <div onclick="selectCareScreen(6)" id="card-6" class="care-card cursor-pointer p-4 rounded-2xl border border-slate-200 bg-white hover:border-brand-300 hover:shadow-md transition-all hover:scale-[1.02]">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-8 h-8 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-sm">6</div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800 text-sm">6. หน้าตารางยา</h4>
+                                    <span class="text-[11px] text-slate-500">เตือนกินยาและกดยืนยันผล</span>
+                                </div>
+                            </div>
+                            <div class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                                • ตารางรับประทานยาประจำวัน<br>
+                                • สถานะรับประทานแล้ว / รอการยืนยัน<br>
+                                • สามารถกดยืนยันการทานยาผ่านแอป
+                            </div>
+                        </div>
+
+                        <!-- Card 7 -->
+                        <div onclick="selectCareScreen(7)" id="card-7" class="care-card cursor-pointer p-4 rounded-2xl border border-slate-200 bg-white hover:border-brand-300 hover:shadow-md transition-all hover:scale-[1.02]">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-8 h-8 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center font-bold text-sm">7</div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800 text-sm">7. หน้าจัดการผู้ดูแล</h4>
+                                    <span class="text-[11px] text-slate-500">กำหนดสิทธิ์ทีมดูแลครอบครัว</span>
+                                </div>
+                            </div>
+                            <div class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                                • รายชื่อลูกหลานและผู้ดูแลใกล้ชิด<br>
+                                • สิทธิ์การเข้าถึงข้อมูลทั้งหมด / บางส่วน<br>
+                                • ปุ่มเพิ่มผู้ดูแลใหม่ได้ง่าย
+                            </div>
+                        </div>
+
+                        <!-- Card 8 -->
+                        <div onclick="selectCareScreen(8)" id="card-8" class="care-card cursor-pointer p-4 rounded-2xl border border-slate-200 bg-white hover:border-brand-300 hover:shadow-md transition-all hover:scale-[1.02]">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-8 h-8 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-sm">8</div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800 text-sm">8. หน้าประวัติและรายงาน</h4>
+                                    <span class="text-[11px] text-slate-500">สรุปรายงานประจำสัปดาห์</span>
+                                </div>
+                            </div>
+                            <div class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                                • กราฟสรุปสถิติสุขภาพรายสัปดาห์<br>
+                                • รายงานจำนวนวันที่ค่าปกติ / เหตุฉุกเฉิน<br>
+                                • Export ดาวน์โหลดไฟล์รายงาน PDF
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
         </div>
+    </section>
 
-      </div>
+    <!-- 4. SMARTORA SENIOR SECTION (สำหรับผู้สูงอายุ - 3 Clean Screens) -->
+    <section id="senior-simulator" class="py-20 bg-brand-50/60 relative border-t border-b border-sky-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header Banner -->
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-emerald-600 text-white text-sm font-semibold mb-4 shadow-md shadow-emerald-500/20">
+                    <i class="fa-solid fa-heart text-sm"></i>
+                    <span>SMARTORA SENIOR</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">
+                    สำหรับผู้สูงอายุ ( Senior UI )
+                </h2>
+                <p class="text-slate-600 text-base sm:text-lg">
+                    ออกแบบพิเศษเน้นตัวอักษรใหญ่ คมชัด ใช้งานง่าย ปุ่มกดขนาดใหญ่ ไม่สับสน
+                </p>
+            </div>
+
+            <!-- 3 Senior Screens Layout Side-by-Side -->
+            <div class="grid md:grid-cols-3 gap-8 justify-items-center">
+                
+                <!-- Senior Screen 1: หน้าแรกผู้สูงอายุ -->
+                <div class="w-full max-w-[320px] bg-white rounded-[40px] p-4 shadow-xl border-4 border-slate-200 flex flex-col">
+                    <div class="text-xs font-bold text-slate-400 text-center mb-2">1. หน้าแรกสำหรับผู้สูงอายุ</div>
+                    
+                    <div class="bg-slate-50 rounded-[30px] p-4 border border-slate-100 flex-1 flex flex-col">
+                        <!-- Greeting -->
+                        <div class="text-center py-4 bg-white rounded-2xl shadow-sm border border-slate-100 mb-4">
+                            <div class="w-12 h-12 rounded-full bg-brand-100 mx-auto flex items-center justify-center text-brand-600 text-xl font-bold mb-2">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-800 text-base">สวัสดีค่ะ คุณยาย</h3>
+                            <p class="text-xs text-brand-600 font-medium">ดูแลตัวเองนะคะ 💙</p>
+                        </div>
+
+                        <!-- Big Emergency Buttons -->
+                        <div class="grid grid-cols-2 gap-3 mb-4">
+                            <button onclick="triggerSeniorCall()" class="bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white p-4 rounded-2xl flex flex-col items-center justify-center shadow-md transition-all">
+                                <i class="fa-solid fa-phone text-2xl mb-1"></i>
+                                <span class="text-xs font-bold">โทรหาลูกหลาน</span>
+                            </button>
+                            <button onclick="triggerSeniorSOS()" class="bg-rose-500 hover:bg-rose-600 active:scale-95 text-white p-4 rounded-2xl flex flex-col items-center justify-center shadow-md transition-all animate-pulse">
+                                <i class="fa-solid fa-bell text-2xl mb-1"></i>
+                                <span class="text-xs font-bold">SOS ขอความช่วยเหลือ</span>
+                            </button>
+                        </div>
+
+                        <!-- 4 Large Menu Tiles -->
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <div class="bg-white p-3 rounded-2xl border border-slate-200 text-center shadow-xs">
+                                <i class="fa-solid fa-heart-pulse text-brand-500 text-xl mb-1"></i>
+                                <div class="text-[11px] font-bold text-slate-700">ดูสุขภาพของฉัน</div>
+                            </div>
+                            <div class="bg-white p-3 rounded-2xl border border-slate-200 text-center shadow-xs">
+                                <i class="fa-solid fa-pills text-amber-500 text-xl mb-1"></i>
+                                <div class="text-[11px] font-bold text-slate-700">ตารางยา</div>
+                            </div>
+                            <div class="bg-white p-3 rounded-2xl border border-slate-200 text-center shadow-xs">
+                                <i class="fa-solid fa-comment-dots text-sky-500 text-xl mb-1"></i>
+                                <div class="text-[11px] font-bold text-slate-700">ข้อความ</div>
+                            </div>
+                            <div class="bg-white p-3 rounded-2xl border border-slate-200 text-center shadow-xs">
+                                <i class="fa-solid fa-gear text-slate-500 text-xl mb-1"></i>
+                                <div class="text-[11px] font-bold text-slate-700">ตั้งค่า</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Senior Screen 2: หน้าสุขภาพของฉัน -->
+                <div class="w-full max-w-[320px] bg-white rounded-[40px] p-4 shadow-xl border-4 border-slate-200 flex flex-col">
+                    <div class="text-xs font-bold text-slate-400 text-center mb-2">2. หน้าสุขภาพของฉัน</div>
+                    
+                    <div class="bg-slate-50 rounded-[30px] p-4 border border-slate-100 flex-1 flex flex-col">
+                        <div class="flex items-center gap-2 mb-4">
+                            <i class="fa-solid fa-chevron-left text-slate-400"></i>
+                            <h3 class="font-bold text-slate-800 text-sm">สุขภาพของฉัน</h3>
+                        </div>
+
+                        <!-- Main Big Heart Rate Card -->
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 text-center mb-4">
+                            <i class="fa-solid fa-heart-pulse text-rose-500 text-4xl mb-2 animate-pulse"></i>
+                            <div class="text-4xl font-extrabold text-slate-900 font-english">78</div>
+                            <div class="text-xs font-bold text-slate-500">BPM</div>
+                            <span class="inline-block mt-2 px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-bold">
+                                <i class="fa-solid fa-check text-[10px] mr-1"></i> ปกติ
+                            </span>
+                        </div>
+
+                        <!-- Blood Pressure & Oxygen Cards -->
+                        <div class="grid grid-cols-2 gap-3 mb-4">
+                            <div class="bg-white p-3 rounded-2xl border border-slate-100 text-center">
+                                <i class="fa-solid fa-gauge-high text-sky-500 text-lg mb-1"></i>
+                                <div class="text-lg font-extrabold text-slate-800 font-english">120/80</div>
+                                <div class="text-[10px] text-slate-500">mmHg</div>
+                            </div>
+                            <div class="bg-white p-3 rounded-2xl border border-slate-100 text-center">
+                                <i class="fa-solid fa-droplet text-brand-500 text-lg mb-1"></i>
+                                <div class="text-lg font-extrabold text-slate-800 font-english">98%</div>
+                                <div class="text-[10px] text-slate-500">SpO2</div>
+                            </div>
+                        </div>
+
+                        <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-2xl text-center text-xs font-bold text-emerald-800">
+                            สุขภาพของคุณอยู่ในเกณฑ์ปกติ 😊
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Senior Screen 3: หน้าตารางยา -->
+                <div class="w-full max-w-[320px] bg-white rounded-[40px] p-4 shadow-xl border-4 border-slate-200 flex flex-col">
+                    <div class="text-xs font-bold text-slate-400 text-center mb-2">3. หน้าตารางยา</div>
+                    
+                    <div class="bg-slate-50 rounded-[30px] p-4 border border-slate-100 flex-1 flex flex-col">
+                        <div class="flex items-center gap-2 mb-4">
+                            <i class="fa-solid fa-chevron-left text-slate-400"></i>
+                            <h3 class="font-bold text-slate-800 text-sm">ตารางยา</h3>
+                        </div>
+
+                        <div class="space-y-3">
+                            <!-- Med 1 (Done) -->
+                            <div class="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs font-bold text-slate-800">ยาลดความดัน</span>
+                                    <span class="text-[10px] text-slate-400">เวลา 08:00 น.</span>
+                                </div>
+                                <div class="flex items-center justify-between mt-2 pt-2 border-t border-slate-50">
+                                    <span class="text-[11px] text-emerald-600 font-semibold flex items-center gap-1">
+                                        <i class="fa-solid fa-circle-check"></i> รับประทานแล้ว
+                                    </span>
+                                    <span class="text-[10px] text-slate-400">เมื่อ 08:15 น.</span>
+                                </div>
+                            </div>
+
+                            <!-- Med 2 (Pending - Clickable) -->
+                            <div id="senior-med-card" class="bg-white p-3.5 rounded-2xl border-2 border-brand-300 shadow-sm">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs font-bold text-slate-800">ยาลดไขมัน</span>
+                                    <span class="text-[10px] text-brand-600 font-bold">เวลา 20:00 น.</span>
+                                </div>
+                                <button id="senior-med-btn" onclick="confirmSeniorMed()" class="w-full mt-2 py-2 bg-brand-500 hover:bg-brand-600 active:scale-95 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm">
+                                    <i class="fa-solid fa-clock"></i>
+                                    <span>รอการยืนยัน (กดเพื่อรับประทาน)</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. WHY SMARTORA (จุดเด่น 4 ประการ) -->
+    <section id="why-us" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-600 font-semibold text-sm tracking-widest uppercase">WHY CHOOSE SMARTORA</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">
+                    จุดเด่นที่คุณไว้วางใจได้
+                </h2>
+                <p class="text-slate-600 text-base mt-2">
+                    พัฒนาขึ้นโดยคำนึงถึงความปลอดภัย ความแม่นยำ และความสะดวกของผู้ใช้งานทุกวัย
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Card 1 -->
+                <div class="p-6 rounded-3xl bg-white border border-sky-100 shadow-lg shadow-sky-100/50 hover:border-brand-300 hover:shadow-xl transition-all duration-300 flex flex-col items-start group">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-100 text-brand-600 flex items-center justify-center text-2xl mb-5 group-hover:bg-brand-500 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">ปลอดภัย</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        ข้อมูลเป็นส่วนตัวด้วยการเข้ารหัสความปลอดภัยระดับสูง ป้องกันการรั่วไหลของข้อมูลสุขภาพ
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="p-6 rounded-3xl bg-white border border-sky-100 shadow-lg shadow-sky-100/50 hover:border-brand-300 hover:shadow-xl transition-all duration-300 flex flex-col items-start group">
+                    <div class="w-14 h-14 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center text-2xl mb-5 group-hover:bg-sky-500 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">แม่นยำ</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        ด้วยเทคโนโลยีอัจฉริยะและเซ็นเซอร์รุ่นล่าสุด ตรวจจับการล้มและสัญญาณชีพอย่างเที่ยงตรง
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="p-6 rounded-3xl bg-white border border-sky-100 shadow-lg shadow-sky-100/50 hover:border-brand-300 hover:shadow-xl transition-all duration-300 flex flex-col items-start group">
+                    <div class="w-14 h-14 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center text-2xl mb-5 group-hover:bg-rose-500 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">แจ้งเตือนทันที</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        ส่งสัญญาณเตือนภัยทันทีเมื่อเกิดเหตุฉุกเฉิน ดูแลคนที่คุณรักได้แม้จะอยู่ไกลกัน
+                    </p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="p-6 rounded-3xl bg-white border border-sky-100 shadow-lg shadow-sky-100/50 hover:border-brand-300 hover:shadow-xl transition-all duration-300 flex flex-col items-start group">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mb-5 group-hover:bg-emerald-500 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-face-smile"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">ใช้งานง่าย</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        ออกแบบเมนูเรียบง่าย เหมาะสำหรับผู้สูงอายุและทุกคนในครอบครัว ไม่ซับซ้อน
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. FOOTER -->
+    <footer class="bg-gradient-to-br from-slate-900 via-brand-900 to-slate-950 text-white py-16 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-12 gap-10 pb-12 border-b border-slate-800">
+                
+                <!-- Brand Info -->
+                <div class="md:col-span-5 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-brand-500 flex items-center justify-center text-white">
+                            <i class="fa-solid fa-shield-heart text-xl"></i>
+                        </div>
+                        <span class="text-2xl font-extrabold font-english tracking-tight">SMARTORA</span>
+                    </div>
+                    <p class="text-slate-400 text-sm max-w-sm">
+                        "Your Invisible Protection." — ดูแลด้วยเทคโนโลยี ห่วงใยด้วยหัวใจ ยกระดับคุณภาพชีวิตผู้สูงอายุในไทย
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="md:col-span-3 space-y-3">
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-sky-400">ลิงก์ด่วน</h4>
+                    <ul class="space-y-2 text-sm text-slate-300">
+                        <li><a href="#hero" class="hover:text-brand-400 transition-colors">หน้าแรก</a></li>
+                        <li><a href="#care-simulator" class="hover:text-brand-400 transition-colors">SMARTORA Care</a></li>
+                        <li><a href="#senior-simulator" class="hover:text-brand-400 transition-colors">SMARTORA Senior</a></li>
+                        <li><a href="#why-us" class="hover:text-brand-400 transition-colors">จุดเด่นผลิตภัณฑ์</a></li>
+                    </ul>
+                </div>
+
+                <!-- Downloads & Contact -->
+                <div class="md:col-span-4 space-y-4">
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-sky-400">ดาวน์โหลดแอปพลิเคชัน</h4>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="openModal('downloadModal')" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2.5 rounded-xl border border-slate-700 flex items-center gap-3 transition-all text-left">
+                            <i class="fa-brands fa-apple text-2xl"></i>
+                            <div>
+                                <div class="text-[9px] text-slate-400 uppercase">Download on the</div>
+                                <div class="text-xs font-bold font-english">App Store</div>
+                            </div>
+                        </button>
+                        <button onclick="openModal('downloadModal')" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2.5 rounded-xl border border-slate-700 flex items-center gap-3 transition-all text-left">
+                            <i class="fa-brands fa-google-play text-xl"></i>
+                            <div>
+                                <div class="text-[9px] text-slate-400 uppercase">GET IT ON</div>
+                                <div class="text-xs font-bold font-english">Google Play</div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-4">
+                <div>© 2026 SMARTORA Co., Ltd. All rights reserved.</div>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-slate-400">นโยบายความเป็นส่วนตัว</a>
+                    <a href="#" class="hover:text-slate-400">เงื่อนไขการใช้งาน</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL: Download Notification -->
+    <div id="downloadModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl p-6 max-w-sm w-full text-center shadow-2xl transform transition-all">
+            <div class="w-14 h-14 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center text-2xl mx-auto mb-4">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">พร้อมดาวน์โหลดเร็วๆ นี้</h3>
+            <p class="text-sm text-slate-600 mb-6">
+                แอปพลิเคชัน SMARTORA ทั้งระบบ Care และ Senior กำลังเตรียมเปิดให้ดาวน์โหลดบน App Store และ Google Play
+            </p>
+            <button onclick="closeModal('downloadModal')" class="w-full bg-brand-500 text-white font-bold py-3 rounded-xl hover:bg-brand-600 transition-colors">
+                ตกลง
+            </button>
+        </div>
     </div>
-  </section>
 
-  <!-- SECTION 2: SMARTORA SENIOR (สำหรับผู้สูงอายุ) -->
-  <section id="senior-app" class="py-20 bg-gradient-to-b from-brand-50 to-white border-t border-brand-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <!-- Section Header -->
-      <div class="text-center max-w-3xl mx-auto mb-14">
-        <div class="inline-flex items-center gap-2.5 bg-sky-700 text-white px-6 py-2 rounded-full shadow-md shadow-sky-700/20 mb-4">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4
+    <!-- MODAL: Add Caregiver Modal (Triggered inside phone simulator 7) -->
+    <div id="addCaregiverModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-user-plus text-brand-500"></i>
+                    <span>เพิ่มผู้ดูแลใหม่</span>
+                </h3>
+                <button onclick="closeModal('addCaregiverModal')" class="text-slate-400 hover:text-slate-600">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="space-y-3 mb-6">
+                <div>
+                    <label class="text-xs font-bold text-slate-600 block mb-1">ชื่อ-นามสกุล ผู้ดูแล</label>
+                    <input type="text" placeholder="ระบุชื่อ..." class="w-full p-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-500">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-slate-600 block mb-1">ความสัมพันธ์</label>
+                    <select class="w-full p-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-500">
+                        <option>ลูกสาว / ลูกชาย</option>
+                        <option>หลาน</option>
+                        <option>ผู้ดูแลใกล้บ้าน</option>
+                        <option>พยาบาล / เจ้าหน้าที่</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-slate-600 block mb-1">สิทธิ์การเข้าถึง</label>
+                    <div class="space-y-1.5 text-xs text-slate-600">
+                        <label class="flex items-center gap-2">
+                            <input type="radio" name="perm" checked class="text-brand-500"> ดูแลได้บางส่วน (ดูเฉพาะตำแหน่งและ SOS)
+                        </label>
+                        <label class="flex items-center gap-2">
+                            <input type="radio" name="perm" class="text-brand-500"> ดูแลทั้งหมด (เข้าถึงทุกฟังก์ชัน)
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <button onclick="saveCaregiver()" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-3 rounded-xl transition-all shadow-md shadow-brand-500/20">
+                บันทึกผู้ดูแล
+            </button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT FOR SIMULATOR AND INTERACTION -->
+    <script>
+        // State for Caregiver list in Screen 7
+        let caregiversList = [
+            { name: "คุณลูกสาว", role: "เจ้าของบัญชี", perm: "ดูแลทั้งหมด", badgeBg: "bg-brand-100", badgeText: "text-brand-700" },
+            { name: "คุณหลานชาย", role: "สมาชิก", perm: "ดูแลได้บางส่วน", badgeBg: "bg-slate-100", badgeText: "text-slate-600" },
+            { name: "ผู้ดูแลใกล้บ้าน", role: "สมาชิก", perm: "ดูแลได้บางส่วน", badgeBg: "bg-slate-100", badgeText: "text-slate-600" }
+        ];
+
+        // State for CCTV Active Camera
+        let activeCCTV = 'หน้าบ้าน';
+
+        // State for Med 2 status
+        let isMed2Confirmed = false;
+
+        // Current active screen in simulator (1-8)
+        let currentCareScreen = 1;
+
+        // Render Functions for Care Screens
+        function renderCareScreen(screenId) {
+            const container = document.getElementById('care-screen-content');
+            
+            switch(screenId) {
+                case 1: // Dashboard
+                    container.innerHTML = `
+                        <div class="space-y-3 font-sans">
+                            <!-- Profile Header -->
+                            <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-10 h-10 rounded-full bg-amber-100 border-2 border-brand-300 flex items-center justify-center text-amber-700 font-bold text-xs">
+                                        👵
+                                    </div>
+                                    <div>
+                                        <div class="text-xs font-bold text-slate-800 flex items-center gap-1">
+                                            <span>คุณแม่สมใจ</span>
+                                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                        </div>
+                                        <div class="text-[10px] text-emerald-600">เชื่อมต่อแล้ว</div>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-bell text-slate-400 text-sm hover:text-brand-500"></i>
+                            </div>
+
+                            <!-- Safety Status Card -->
+                            <div class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white p-3.5 rounded-2xl shadow-md flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-shield-check"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs font-bold">ปลอดภัย</div>
+                                    <div class="text-[10px] opacity-90">ยังไม่มีการแจ้งเตือนเหตุผิดปกติ</div>
+                                </div>
+                            </div>
+
+                            <!-- Vital Metrics Grid -->
+                            <div class="grid grid-cols-3 gap-2">
+                                <div class="bg-white p-2.5 rounded-2xl border border-slate-100 text-center shadow-xs">
+                                    <i class="fa-solid fa-heart-pulse text-rose-500 text-sm mb-1"></i>
+                                    <div class="text-sm font-extrabold text-slate-800 font-english">78</div>
+                                    <div class="text-[9px] text-slate-400">BPM</div>
+                                </div>
+                                <div class="bg-white p-2.5 rounded-2xl border border-slate-100 text-center shadow-xs">
+                                    <i class="fa-solid fa-gauge-high text-sky-500 text-sm mb-1"></i>
+                                    <div class="text-sm font-extrabold text-slate-800 font-english">120/80</div>
+                                    <div class="text-[9px] text-slate-400">mmHg</div>
+                                </div>
+                                <div class="bg-white p-2.5 rounded-2xl border border-slate-100 text-center shadow-xs">
+                                    <i class="fa-solid fa-droplet text-brand-500 text-sm mb-1"></i>
+                                    <div class="text-sm font-extrabold text-slate-800 font-english">98%</div>
+                                    <div class="text-[9px] text-slate-400">SpO2</div>
+                                </div>
+                            </div>
+
+                            <!-- Location Preview Card -->
+                            <div class="bg-white p-3 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xs">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-[11px] font-bold text-slate-800">ตำแหน่งล่าสุด</div>
+                                        <div class="text-[10px] text-slate-500">ที่บ้าน • 10:35 น.</div>
+                                    </div>
+                                </div>
+                                <button onclick="selectCareScreen(3)" class="text-slate-400 hover:text-brand-600 text-xs">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </button>
+                            </div>
+
+                            <!-- Quick Action Buttons -->
+                            <div class="grid grid-cols-3 gap-2 pt-1">
+                                <button onclick="selectCareScreen(4)" class="bg-slate-50 hover:bg-brand-50 p-2 rounded-xl border border-slate-200 text-center">
+                                    <i class="fa-solid fa-video text-indigo-500 text-xs block mb-1"></i>
+                                    <span class="text-[9px] font-medium text-slate-700">กล้อง CCTV</span>
+                                </button>
+                                <button onclick="selectCareScreen(6)" class="bg-slate-50 hover:bg-brand-50 p-2 rounded-xl border border-slate-200 text-center">
+                                    <i class="fa-solid fa-pills text-amber-500 text-xs block mb-1"></i>
+                                    <span class="text-[9px] font-medium text-slate-700">แจ้งเตือนยา</span>
+                                </button>
+                                <button onclick="selectCareScreen(5)" class="bg-rose-50 hover:bg-rose-100 p-2 rounded-xl border border-rose-200 text-center">
+                                    <i class="fa-solid fa-triangle-exclamation text-rose-600 text-xs block mb-1"></i>
+                                    <span class="text-[9px] font-bold text-rose-600">ฉุกเฉิน SOS</span>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 2: // Health Info
+                    container.innerHTML = `
+                        <div class="space-y-3 font-sans">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-bold text-slate-800 text-xs">ข้อมูลสุขภาพ</h4>
+                                <div class="flex bg-slate-200 p-0.5 rounded-lg text-[9px] font-medium">
+                                    <button class="px-2 py-0.5 rounded-md bg-white shadow-xs text-brand-600 font-bold">7 วัน</button>
+                                    <button class="px-2 py-0.5 rounded-md text-slate-600">30 วัน</button>
+                                    <button class="px-2 py-0.5 rounded-md text-slate-600">ทั้งหมด</button>
+                                </div>
+                            </div>
+
+                            <!-- Heart Rate Card + Interactive Visual Chart -->
+                            <div class="bg-white p-3 rounded-2xl border border-slate-100 shadow-sm">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center gap-1.5">
+                                        <i class="fa-solid fa-heart text-rose-500 text-xs"></i>
+                                        <span class="text-xs font-bold text-slate-800">ชีพจรเฉลี่ย</span>
+                                    </div>
+                                    <span class="text-xs font-extrabold text-slate-800 font-english">78 BPM <span class="text-[9px] text-emerald-500 font-normal">↑ +2</span></span>
+                                </div>
+                                
+                                <!-- Simulated SVG Line Chart -->
+                                <div class="h-20 w-full pt-2">
+                                    <svg class="w-full h-full" viewBox="0 0 200 60" fill="none">
+                                        <path d="M0,40 Q25,20 50,35 T100,25 T150,45 T200,20" stroke="#0EA5E9" stroke-width="2.5" fill="none"/>
+                                        <circle cx="100" cy="25" r="4" fill="#0EA5E9"/>
+                                        <circle cx="200" cy="20" r="4" fill="#0284C7"/>
+                                    </svg>
+                                    <div class="flex justify-between text-[8px] text-slate-400 mt-1">
+                                        <span>จ.</span><span>อ.</span><span>พ.</span><span>พฤ.</span><span>ศ.</span><span>ส.</span><span>อา.</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Blood Pressure Card -->
+                            <div class="bg-white p-3 rounded-2xl border border-slate-100 shadow-sm">
+                                <div class="flex items-center justify-between mb-1">
+                                    <div class="flex items-center gap-1.5">
+                                        <i class="fa-solid fa-gauge-high text-sky-500 text-xs"></i>
+                                        <span class="text-xs font-bold text-slate-800">ความดันเฉลี่ย</span>
+                                    </div>
+                                    <span class="text-xs font-bold text-slate-800">120/80 mmHg</span>
+                                </div>
+                                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden mt-2">
+                                    <div class="bg-sky-500 h-full w-[65%] rounded-full"></div>
+                                </div>
+                            </div>
+
+                            <!-- SpO2 Card -->
+                            <div class="bg-white p-3 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-droplet text-brand-500 text-sm"></i>
+                                    <span class="text-xs font-bold text-slate-800">ออกซิเจนในเลือด</span>
+                                </div>
+                                <span class="text-xs font-bold text-slate-800 font-english">98% <i class="fa-solid fa-check text-emerald-500 text-[10px] ml-1"></i></span>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 3: // GPS Location
+                    container.innerHTML = `
+                        <div class="space-y-3 font-sans">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-bold text-slate-800 text-xs">ติดตามตำแหน่ง</h4>
+                                <span class="text-[9px] text-slate-400">อัปเดตล่าสุด: 10:35 น.</span>
+                            </div>
+
+                            <!-- Map Canvas Mockup -->
+                            <div class="relative w-full h-44 rounded-2xl bg-slate-200 overflow-hidden border border-slate-300 flex items-center justify-center">
+                                <!-- Map Graphic Background -->
+                                <div class="absolute inset-0 opacity-40 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:12px_12px] bg-slate-300"></div>
+                                
+                                <!-- Safe Zone Circle -->
+                                <div class="absolute w-28 h-28 rounded-full bg-emerald-500/20 border-2 border-emerald-500/60 flex items-center justify-center">
+                                    <span class="text-[8px] font-bold text-emerald-800 bg-white/80 px-1 rounded">พื้นที่ปลอดภัย (บ้าน)</span>
+                                </div>
+
+                                <!-- User Pin -->
+                                <div class="relative z-10 flex flex-col items-center">
+                                    <div class="w-8 h-8 rounded-full bg-brand-500 border-2 border-white shadow-md flex items-center justify-center text-white text-xs font-bold animate-bounce">
+                                        👵
+                                    </div>
+                                    <div class="w-2 h-2 bg-slate-800 rounded-full opacity-30 mt-0.5"></div>
+                                </div>
+                            </div>
+
+                            <!-- Location Info Card -->
+                            <div class="bg-white p-3 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between">
+                                <div>
+                                    <div class="text-[11px] font-bold text-slate-800">ตำแหน่งปัจจุบัน</div>
+                                    <div class="text-[10px] text-slate-500">บ้านเลขที่ 99</div>
+                                </div>
+                                <button class="bg-brand-500 text-white px-3 py-1.5 rounded-xl text-[10px] font-bold shadow-xs hover:bg-brand-600">
+                                    ดูเส้นทาง
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 4: // CCTV Camera
+                    container.innerHTML = `
+                        <div class="space-y-3 font-sans">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-bold text-slate-800 text-xs">กล้องวงจรปิด</h4>
+                                <span class="text-[9px] font-bold text-rose-500 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200 flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-ping"></span> LIVE
+                                </span>
+                            </div>
+
+                            <!-- Room Selector Tabs -->
+                            <div class="grid grid-cols-3 gap-1 bg-slate-200 p-1 rounded-xl text-[9px] font-bold text-center">
+                                <button onclick="switchCCTV('หน้าบ้าน')" class="py-1 rounded-lg ${activeCCTV === 'หน้าบ้าน' ? 'bg-brand-600 text-white' : 'text-slate-600'}">หน้าบ้าน</button>
+                                <button onclick="switchCCTV('ห้องนั่งเล่น')" class="py-1 rounded-lg ${activeCCTV === 'ห้องนั่งเล่น' ? 'bg-brand-600 text-white' : 'text-slate-600'}">ห้องนั่งเล่น</button>
+                                <button onclick="switchCCTV('ห้องครัว')" class="py-1 rounded-lg ${activeCCTV === 'ห้องครัว' ? 'bg-brand-600 text-white' : 'text-slate-600'}">ห้องครัว</button>
+                            </div>
+
+                            <!-- Live Camera Feed Display -->
+                            <div class="relative w-full h-44 rounded-2xl bg-slate-900 overflow-hidden border border-slate-700 flex items-center justify-center text-white">
+                                <div class="absolute top-2 left-2 text-[9px] bg-black/60 px-2 py-0.5 rounded text-slate-300">
+                                    กล้อง: ${activeCCTV}
+                                </div>
+                                
+                                <!-- Play Icon & Graphic -->
+                                <div class="text-center">
+                                    <div class="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur flex items-center justify-center mx-auto mb-1 cursor-pointer transition-transform hover:scale-110">
+                                        <i class="fa-solid fa-play text-white ml-0.5 text-sm"></i>
+                                    </div>
+                                    <span class="text-[10px] opacity-75">สตรีมภาพสด 1080p</span>
+                                </div>
+                            </div>
+
+                            <button class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1.5 transition-colors">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                                <span>ดูย้อนหลัง</span>
+                            </button>
+                        </div>
+                    `;
+                    break;
+
+                case 5: // Emergency Alert
+                    container.innerHTML = `
+                        <div class="space-y-3 font-sans">
+                            <!-- RED EMERGENCY ALERT CARD -->
+                            <div class="bg-rose-500 text-white p-4 rounded-2xl shadow-lg border border-rose-600 text-center animate-pulse">
+                                <div class="w-12 h-12 rounded-full bg-white/20 mx-auto flex items-center justify-center text-white text-2xl mb-2">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                </div>
+                                <h3 class="text-xs font-extrabold uppercase tracking-wider text-rose-100">EMERGENCY ALERT</h3>
+                                <div class="text-sm font-bold mt-1">ตรวจพบเหตุการณ์อาจเกิดการล้ม</div>
+                                <div class="text-[10px] text-rose-100 mt-2">เวลา 14:25 น.</div>
+                                <div class="text-[10px] text-rose-100 flex items-center justify-center gap-1 mt-0.5">
+                                    <i class="fa-solid fa-location-dot"></i> ตำแหน่ง: บริเวณบ้าน
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <button class="w-full py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl text-xs shadow-md transition-all">
+                                    ดูรายละเอียด
+                                </button>
+                                <button onclick="triggerEmergencyCall()" class="w-full py-2.5 bg-white border border-rose-300 text-rose-600 font-bold rounded-xl text-xs hover:bg-rose-50 transition-all">
+                                    โทรหาผู้ดูแล
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 6: // Medication Schedule
+                    container.innerHTML = `
+                        <div class="space-y-3 font-sans">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-bold text-slate-800 text-xs">แจ้งเตือนยา</h4>
+                                <span class="text-[9px] text-slate-500">วันนี้ • 19 พ.ย. 2568</span>
+                            </div>
+
+                            <div class="space-y-2">
+                                <!-- Med 1 -->
+                                <div class="bg-white p-3 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xs">
+                                            <i class="fa-solid fa-capsules"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-[11px] font-bold text-slate-800">ยาลดความดัน</div>
+                                            <div class="text-[9px] text-slate-400">เวลา 08:00 น.</div>
+                                        </div>
+                                    </div>
+                                    <span class="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full border border-emerald-200">
+                                        <i class="fa-solid fa-check"></i> รับประทานแล้ว
+                                    </span>
+                                </div>
+
+                                <!-- Med 2 (Dynamic interactive state) -->
+                                <div class="bg-white p-3 rounded-2xl border ${isMed2Confirmed ? 'border-emerald-200 bg-emerald-50/20' : 'border-amber-200'} shadow-sm flex items-center justify-between">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-8 h-8 rounded-xl ${isMed2Confirmed ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'} flex items-center justify-center text-xs">
+                                            <i class="fa-solid fa-pills"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-[11px] font-bold text-slate-800">ยาลดไขมัน</div>
+                                            <div class="text-[9px] text-slate-400">เวลา 20:00 น.</div>
+                                        </div>
+                                    </div>
+                                    
+                                    ${isMed2Confirmed ? `
+                                        <span class="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full border border-emerald-200">
+                                            <i class="fa-solid fa-check"></i> รับประทานแล้ว
+                                        </span>
+                                    ` : `
+                                        <button onclick="toggleCareMed2()" class="text-[9px] font-bold text-amber-700 bg-amber-100 hover:bg-amber-200 px-2.5 py-1 rounded-full border border-amber-300 transition-colors">
+                                            รอการยืนยัน
+                                        </button>
+                                    `}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 7: // Caregiver Management
+                    let listHtml = caregiversList.map(c => `
+                        <div class="bg-white p-2.5 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-7 h-7 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+                                <div>
+                                    <div class="text-[11px] font-bold text-slate-800">${c.name}</div>
+                                    <div class="text-[9px] text-slate-400">${c.perm}</div>
+                                </div>
+                            </div>
+                            <span class="text-[8px] font-bold px-2 py-0.5 rounded-md ${c.badgeBg} ${c.badgeText}">${c.role}</span>
+                        </div>
+                    `).join('');
+
+                    container.innerHTML = `
+                        <div class="space-y-3 font-sans">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-bold text-slate-800 text-xs">จัดการผู้ดูแล</h4>
+                                <span class="text-[9px] text-brand-600 font-bold">${caregiversList.length} คน</span>
+                            </div>
+
+                            <div class="space-y-2">
+                                ${listHtml}
+                            </div>
+
+                            <button onclick="openModal('addCaregiverModal')" class="w-full py-2 bg-brand-500 hover:bg-brand-600 text-white rounded-xl text-[11px] font-bold transition-all flex items-center justify-center gap-1 shadow-sm">
+                                <i class="fa-solid fa-plus"></i>
+                                <span>เพิ่มผู้ดูแล</span>
+                            </button>
+                        </div>
+                    `;
+                    break;
+
+                case 8: // History & Reports
+                    container.innerHTML = `
+                        <div class="space-y-3 font-sans">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-bold text-slate-800 text-xs">ประวัติและรายงาน</h4>
+                                <div class="flex gap-1 text-[9px] font-bold text-slate-500">
+                                    <span class="text-brand-600 underline">สุขภาพ</span> | <span>เหตุการณ์</span>
+                                </div>
+                            </div>
+
+                            <!-- Weekly Bar Chart -->
+                            <div class="bg-white p-3 rounded-2xl border border-slate-100 shadow-sm">
+                                <div class="text-[10px] font-bold text-slate-600 mb-2">สถิติความดันและชีพจรรายสัปดาห์</div>
+                                <div class="h-24 flex items-end justify-between gap-1.5 px-2 pt-2">
+                                    <div class="w-full bg-brand-100 h-[60%] rounded-t"></div>
+                                    <div class="w-full bg-brand-500 h-[80%] rounded-t"></div>
+                                    <div class="w-full bg-brand-400 h-[70%] rounded-t"></div>
+                                    <div class="w-full bg-brand-600 h-[90%] rounded-t"></div>
+                                    <div class="w-full bg-brand-500 h-[75%] rounded-t"></div>
+                                    <div class="w-full bg-brand-200 h-[50%] rounded-t"></div>
+                                    <div class="w-full bg-brand-500 h-[85%] rounded-t"></div>
+                                </div>
+                            </div>
+
+                            <!-- Summary Checklist -->
+                            <div class="bg-white p-3 rounded-2xl border border-slate-100 shadow-sm space-y-1.5">
+                                <div class="text-[10px] font-bold text-slate-700">สรุปสุขภาพรายสัปดาห์</div>
+                                <div class="flex justify-between text-[10px] text-slate-600">
+                                    <span><i class="fa-solid fa-circle-check text-emerald-500"></i> ชีพจรปกติ</span>
+                                    <span class="font-bold">6 วัน</span>
+                                </div>
+                                <div class="flex justify-between text-[10px] text-slate-600">
+                                    <span><i class="fa-solid fa-circle-check text-emerald-500"></i> ความดันปกติ</span>
+                                    <span class="font-bold">5 วัน</span>
+                                </div>
+                                <div class="flex justify-between text-[10px] text-slate-600">
+                                    <span><i class="fa-solid fa-circle-check text-emerald-500"></i> ไม่มีเหตุฉุกเฉิน</span>
+                                    <span class="font-bold text-emerald-600">✓</span>
+                                </div>
+                            </div>
+
+                            <button onclick="downloadReportToast()" class="w-full py-2 border border-brand-300 text-brand-600 hover:bg-brand-50 rounded-xl text-[10px] font-bold transition-all flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-download"></i>
+                                <span>ดาวน์โหลดรายงาน PDF</span>
+                            </button>
+                        </div>
+                    `;
+                    break;
+            }
+        }
+
+        // Handle Care Screen Selection and Active Card Highlight
+        function selectCareScreen(screenId) {
+            currentCareScreen = screenId;
+            renderCareScreen(screenId);
+
+            // Update card highlights
+            document.querySelectorAll('.care-card').forEach((card, idx) => {
+                if (idx + 1 === screenId) {
+                    card.classList.add('border-brand-500', 'shadow-md');
+                    card.classList.remove('border-slate-200');
+                } else {
+                    card.classList.remove('border-brand-500', 'shadow-md');
+                    card.classList.add('border-slate-200');
+                }
+            });
+
+            // Update navbar active icon inside phone
+            for (let i = 1; i <= 8; i++) {
+                const btn = document.getElementById(`nav-btn-${i}`);
+                if (btn) {
+                    if (i === screenId) {
+                        btn.className = "flex flex-col items-center gap-1 text-brand-600 font-bold";
+                    } else {
+                        btn.className = "flex flex-col items-center gap-1 hover:text-brand-600";
+                    }
+                }
+            }
+        }
+
+        // Helper Interactions inside simulator
+        function switchCCTV(roomName) {
+            activeCCTV = roomName;
+            renderCareScreen(4);
+        }
+
+        function toggleCareMed2() {
+            isMed2Confirmed = !isMed2Confirmed;
+            renderCareScreen(6);
+        }
+
+        function confirmSeniorMed() {
+            const btn = document.getElementById('senior-med-btn');
+            const card = document.getElementById('senior-med-card');
+            if (btn && card) {
+                btn.innerHTML = `<i class="fa-solid fa-check"></i> รับประทานแล้ว`;
+                btn.className = "w-full mt-2 py-2 bg-emerald-500 text-white rounded-xl text-xs font-bold transition-all shadow-sm";
+                card.className = "bg-emerald-50/40 p-3.5 rounded-2xl border border-emerald-200 shadow-sm";
+            }
+        }
+
+        function triggerSeniorCall() {
+            openToast("กำลังโทรหาผู้ดูแล...", "success");
+        }
+
+        function triggerSeniorSOS() {
+            openToast("ส่งสัญญาณ SOS ขอความช่วยเหลือแล้ว!", "danger");
+        }
+
+        function triggerEmergencyCall() {
+            openToast("กำลังเชื่อมต่อสายด่วนผู้ดูแล...", "danger");
+        }
+
+        function downloadReportToast() {
+            openToast("ดาวน์โหลดรายงาน PDF สำเร็จแล้ว", "success");
+        }
+
+        function saveCaregiver() {
+            caregiversList.push({
+                name: "ผู้ดูแลใหม่ (ทดสอบ)",
+                role: "สมาชิก",
+                perm: "ดูแลได้บางส่วน",
+                badgeBg: "bg-slate-100",
+                badgeText: "text-slate-600"
+            });
+            closeModal('addCaregiverModal');
+            selectCareScreen(7);
+            openToast("เพิ่มผู้ดูแลเรียบร้อยแล้ว", "success");
+        }
+
+        // Modal Handlers
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        // Toast Notification System (replaces standard alerts)
+        function openToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            const bg = type === 'danger' ? 'bg-rose-600' : (type === 'success' ? 'bg-emerald-600' : 'bg-brand-600');
+            toast.className = `fixed bottom-6 right-6 ${bg} text-white px-5 py-3 rounded-2xl shadow-2xl z-50 text-xs sm:text-sm font-bold flex items-center gap-2 transform transition-all duration-300 animate-bounce`;
+            toast.innerHTML = `<i class="fa-solid fa-circle-info"></i> <span>${message}</span>`;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        function scrollToFeatures() {
+            document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize Simulator on Load
+        window.onload = function() {
+            selectCareScreen(1);
+        };
+    </script>
+</body>
+</html>
