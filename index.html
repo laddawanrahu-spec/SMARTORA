@@ -1,438 +1,1673 @@
-<!DOCTYPE html>
-<html lang="th" class="scroll-smooth">
+html_content = """<!DOCTYPE html>
+<html lang="th">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SMARTORA — Your Invisible Protection</title>
-
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Prompt', 'Plus Jakarta Sans', 'sans-serif'],
-            display: ['Plus Jakarta Sans', 'Prompt', 'sans-serif'],
-          },
-          colors: {
-            brand: {
-              50: '#f0f9ff',
-              100: '#e0f2fe',
-              200: '#bae6fd',
-              300: '#7dd3fc',
-              400: '#38bdf8',
-              500: '#0ea5e9',
-              600: '#0284c7',
-              700: '#0369a1',
-              800: '#075985',
-              900: '#0c4a6e',
-            }
-          }
-        }
-      }
-    }
-  </script>
-
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; }
+    :root {
+      --sky-50: #f0f9ff;
+      --sky-100: #e0f2fe;
+      --sky-200: #bae6fd;
+      --sky-300: #7dd3fc;
+      --sky-400: #38bdf8;
+      --sky-500: #0ea5e9;
+      --sky-600: #0284c7;
+      --sky-700: #0369a1;
+      --sky-800: #075985;
+      --sky-900: #0c4a6e;
+      --blue-600: #2563eb;
+      --rose-50: #fff1f2;
+      --rose-100: #ffe4e6;
+      --rose-500: #f43f5e;
+      --rose-600: #e11d48;
+      --slate-50: #f8fafc;
+      --slate-100: #f1f5f9;
+      --slate-200: #e2e8f0;
+      --slate-400: #94a3b8;
+      --slate-500: #64748b;
+      --slate-600: #475569;
+      --slate-700: #334155;
+      --slate-800: #1e293b;
+      --slate-900: #0f172a;
+      --emerald-500: #10b981;
+      --amber-50: #fffbeb;
+      --amber-200: #fde68a;
+      --amber-700: #b45309;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Prompt', 'Plus Jakarta Sans', sans-serif;
-      background-color: #f8fafc;
-      color: #0f172a;
-      margin: 0;
-    }
-    .hero-bg {
-      background: radial-gradient(circle at 82% 22%, #dbeafe 0%, #e0f2fe 35%, #f0f9ff 68%, #ffffff 100%);
-    }
-    .phone-frame {
-      box-shadow: 0 25px 55px -12px rgba(2, 132, 199, 0.22), 0 0 0 9px #ffffff, 0 0 0 11px #bae6fd;
-    }
-    .phone-scroll::-webkit-scrollbar { width: 4px; }
-    .phone-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 999px; }
-
-    @keyframes floatDevice {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-10px) rotate(1deg); }
-    }
-    .animate-device { animation: floatDevice 4.5s ease-in-out infinite; }
-
-    @keyframes radarPing {
-      0% { transform: scale(0.85); opacity: 0.75; }
-      100% { transform: scale(1.65); opacity: 0; }
-    }
-    .radar-ring {
-      animation: radarPing 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+      font-family: 'Prompt', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #ffffff;
+      color: var(--slate-900);
+      line-height: 1.55;
+      overflow-x: hidden;
     }
 
-    .senior-large-text .senior-dynamic-title { font-size: 1.35rem !important; }
-    .senior-large-text .senior-dynamic-label { font-size: 1rem !important; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header / Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--sky-100);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--sky-400), var(--sky-600));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px -4px rgba(2, 132, 199, 0.35);
+      flex-shrink: 0;
+    }
+    .brand-title {
+      font-family: 'Plus Jakarta Sans', 'Prompt', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: 0.05em;
+      color: var(--sky-900);
+      line-height: 1.1;
+    }
+    .brand-sub {
+      font-size: 11px;
+      color: var(--sky-600);
+      font-style: italic;
+      font-weight: 500;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--slate-600);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--sky-600); }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-alert-sim {
+      background: var(--rose-50);
+      color: var(--rose-600);
+      border: 1px solid var(--rose-100);
+      padding: 9px 16px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    .btn-alert-sim:hover { background: var(--rose-100); }
+    .dot-ping {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--rose-500);
+      animation: pulseDot 1.5s infinite;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--sky-500), var(--sky-600));
+      color: #ffffff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 8px 20px -4px rgba(2, 132, 199, 0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px -4px rgba(2, 132, 199, 0.45);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: radial-gradient(circle at 80% 25%, #dbeafe 0%, #e0f2fe 38%, #f0f9ff 72%, #ffffff 100%);
+      padding: 56px 0 80px;
+      border-bottom: 1px solid var(--sky-100);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      border: 1px solid var(--sky-200);
+      color: var(--sky-700);
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.08);
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-size: clamp(30px, 4.2vw, 48px);
+      font-weight: 700;
+      line-height: 1.22;
+      color: var(--slate-900);
+      margin-bottom: 18px;
+    }
+    .hero-title span {
+      background: linear-gradient(90deg, var(--sky-600), var(--blue-600), var(--sky-400));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-desc {
+      font-size: 16px;
+      color: var(--slate-600);
+      max-width: 580px;
+      margin-bottom: 26px;
+    }
+    .sensor-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--sky-800);
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+    }
+    .sensor-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .sensor-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      border: 1px solid var(--sky-100);
+      padding: 8px 15px;
+      border-radius: 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--slate-800);
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .sensor-chip:hover {
+      border-color: var(--sky-400);
+      transform: translateY(-2px);
+      background: var(--sky-50);
+    }
+    .sensor-chip.sos { border-color: var(--rose-100); color: var(--rose-600); }
+    .sensor-chip.sos:hover { background: var(--rose-50); border-color: var(--rose-500); }
+    .chip-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    /* Product Showcase Card */
+    .product-card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--sky-200);
+      border-radius: 36px;
+      padding: 32px 26px 26px;
+      text-align: center;
+      box-shadow: 0 24px 50px -12px rgba(2, 132, 199, 0.16);
+    }
+    .product-badge {
+      position: absolute;
+      top: -14px;
+      right: 26px;
+      background: linear-gradient(135deg, var(--sky-600), var(--blue-600));
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 999px;
+      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.3);
+    }
+    .wristband-stage {
+      position: relative;
+      width: 240px;
+      height: 240px;
+      margin: 0 auto 12px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffffff 35%, var(--sky-50) 75%, var(--sky-100) 100%);
+      border: 1px solid var(--sky-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 4px 18px rgba(2, 132, 199, 0.08);
+    }
+    .wristband-svg {
+      width: 220px;
+      height: 220px;
+      animation: floatBand 4s ease-in-out infinite;
+      filter: drop-shadow(0 14px 18px rgba(15, 23, 42, 0.14));
+    }
+    .product-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--slate-900);
+    }
+    .product-sub {
+      font-size: 12px;
+      color: var(--slate-500);
+      margin-top: 4px;
+    }
+    .product-stats {
+      margin-top: 18px;
+      background: var(--sky-50);
+      border: 1px solid var(--sky-100);
+      border-radius: 18px;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      font-size: 12px;
+    }
+    .product-stats > div:nth-child(2) {
+      border-left: 1px solid var(--sky-200);
+      border-right: 1px solid var(--sky-200);
+    }
+    .stat-lbl { color: var(--slate-400); font-size: 11px; display: block; }
+    .stat-val { font-weight: 700; color: var(--slate-800); margin-top: 2px; display: block; }
+
+    /* Sections */
+    .section { padding: 76px 0; }
+    .section-sky {
+      background: linear-gradient(180deg, var(--sky-50) 0%, #ffffff 100%);
+      border-top: 1px solid var(--sky-100);
+    }
+    .section-header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 48px;
+    }
+    .section-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--sky-600), var(--blue-600));
+      color: #ffffff;
+      padding: 9px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      box-shadow: 0 8px 20px -4px rgba(2, 132, 199, 0.35);
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-size: clamp(24px, 3.2vw, 36px);
+      font-weight: 700;
+      color: var(--slate-900);
+      margin-bottom: 10px;
+    }
+    .section-desc {
+      font-size: 15px;
+      color: var(--slate-500);
+    }
+
+    /* Care Simulator Layout */
+    .simulator-grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .phone-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: sticky;
+      top: 92px;
+    }
+    .phone-device {
+      width: 340px;
+      height: 670px;
+      background: var(--slate-50);
+      border-radius: 46px;
+      border: 2px solid var(--sky-200);
+      box-shadow: 0 28px 60px -12px rgba(2, 132, 199, 0.22), 0 0 0 8px #ffffff, 0 0 0 10px var(--sky-100);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .phone-statusbar {
+      background: #ffffff;
+      padding: 12px 22px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--slate-800);
+      flex-shrink: 0;
+    }
+    .phone-notch {
+      width: 84px;
+      height: 16px;
+      background: var(--slate-900);
+      border-radius: 999px;
+    }
+    .phone-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+    .phone-body::-webkit-scrollbar { width: 4px; }
+    .phone-body::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 999px; }
+
+    .phone-bottom-nav {
+      background: #ffffff;
+      border-top: 1px solid var(--slate-100);
+      padding: 8px 6px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      flex-shrink: 0;
+    }
+    .p-tab {
+      background: none;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--slate-400);
+      cursor: pointer;
+      font-family: inherit;
+      padding: 3px 0;
+    }
+    .p-tab.active { color: var(--sky-600); font-weight: 700; }
+    .p-tab-ico { font-size: 16px; line-height: 1.2; }
+
+    .active-caption {
+      margin-top: 16px;
+      background: var(--sky-50);
+      border: 1px solid var(--sky-200);
+      color: var(--sky-800);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 7px 18px;
+      border-radius: 999px;
+    }
+
+    /* 8 Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .feature-card {
+      text-align: left;
+      background: #ffffff;
+      border: 1.5px solid var(--slate-200);
+      border-radius: 20px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .feature-card:hover {
+      border-color: var(--sky-300);
+      box-shadow: 0 10px 24px -6px rgba(2, 132, 199, 0.12);
+      transform: translateY(-2px);
+    }
+    .feature-card.selected {
+      border: 2px solid var(--sky-500);
+      background: var(--sky-50);
+      box-shadow: 0 10px 24px -6px rgba(2, 132, 199, 0.16);
+    }
+    .fc-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .fc-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--sky-100);
+      color: var(--sky-700);
+    }
+    .feature-card.selected .fc-badge {
+      background: var(--sky-600);
+      color: #ffffff;
+    }
+    .fc-badge.danger { background: var(--rose-100); color: var(--rose-600); }
+    .fc-title { font-size: 15px; font-weight: 700; color: var(--slate-900); margin-bottom: 4px; }
+    .fc-desc { font-size: 12px; color: var(--slate-600); line-height: 1.45; }
+
+    /* Senior Phones Grid */
+    .senior-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      justify-items: center;
+    }
+    .senior-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .senior-phone {
+      width: 310px;
+      height: 600px;
+      background: #ffffff;
+      border-radius: 44px;
+      border: 2px solid var(--sky-200);
+      box-shadow: 0 24px 50px -12px rgba(2, 132, 199, 0.18), 0 0 0 8px #ffffff, 0 0 0 10px var(--sky-100);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .senior-caption {
+      margin-top: 14px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--slate-800);
+    }
+
+    /* Senior Large Font Mode */
+    .large-font-mode .s-title { font-size: 22px !important; }
+    .large-font-mode .s-btn-lbl { font-size: 16px !important; }
+
+    /* Pillars */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .pillar-box {
+      background: var(--sky-50);
+      border: 1px solid var(--sky-100);
+      border-radius: 24px;
+      padding: 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .pillar-ico {
+      width: 46px;
+      height: 46px;
+      border-radius: 15px;
+      background: linear-gradient(135deg, var(--sky-500), var(--sky-700));
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .pillar-box h3 { font-size: 17px; font-weight: 700; color: var(--slate-900); }
+    .pillar-box p { font-size: 13px; color: var(--slate-600); margin-top: 3px; }
+
+    /* Footer */
+    .footer {
+      background: linear-gradient(135deg, var(--sky-900), #082f49);
+      color: #ffffff;
+      padding: 44px 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-links a {
+      color: var(--sky-200);
+      text-decoration: none;
+      font-size: 13px;
+    }
+    .footer-links a:hover { color: #ffffff; }
+
+    /* Toast & Modal */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999;
+      background: var(--slate-900);
+      color: #ffffff;
+      padding: 13px 20px;
+      border-radius: 16px;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 18px 36px rgba(15, 23, 42, 0.3);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(130px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--sky-500);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .modal-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 998;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-bg.open { display: flex; }
+    .modal-box {
+      background: #ffffff;
+      border-radius: 26px;
+      max-width: 420px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--sky-100);
+    }
+
+    /* Inner Phone Utility Classes */
+    .p-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 12px;
+      border: 1px solid var(--slate-100);
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+    }
+    .p-btn {
+      width: 100%;
+      border: none;
+      border-radius: 14px;
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .p-btn:active { transform: scale(0.98); }
+    .p-btn-sky { background: var(--sky-600); color: #ffffff; }
+    .p-btn-rose { background: var(--rose-500); color: #ffffff; }
+    .p-btn-soft { background: var(--sky-50); color: var(--sky-700); border: 1px solid var(--sky-200); }
+
+    @keyframes floatBand {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-9px); }
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.3); }
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero-desc { margin-left: auto; margin-right: auto; }
+      .sensor-row { justify-content: center; }
+      .simulator-grid { grid-template-columns: 1fr; }
+      .phone-column { position: static; }
+      .senior-grid { grid-template-columns: 1fr; }
+      .pillars-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .phone-device { width: 315px; height: 640px; }
+    }
   </style>
 </head>
-<body class="antialiased selection:bg-sky-500 selection:text-white">
+<body>
 
-  <!-- Toast Notification (Hidden by default) -->
-  <div id="toast-box" style="transform: translateY(120px); opacity: 0;" class="fixed bottom-6 right-6 z-50 transition-all duration-300 bg-slate-900/95 backdrop-blur text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-sky-500/30 flex items-center gap-3 text-sm font-medium max-w-sm">
-    <span class="w-6 h-6 rounded-full bg-sky-500 flex items-center justify-center text-white text-xs font-bold shrink-0">✓</span>
-    <span id="toast-text">พร้อมใช้งาน</span>
+  <!-- Toast -->
+  <div id="toast" class="toast">
+    <span class="toast-check">✓</span>
+    <span id="toast-msg">พร้อมใช้งาน</span>
   </div>
 
-  <!-- Interactive Modal Overlay (Hidden by default) -->
-  <div id="modal-overlay" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div id="modal-card" class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-sky-100 transform transition-all">
-      <!-- Dynamic Modal Content -->
-    </div>
+  <!-- Modal -->
+  <div id="modal-bg" class="modal-bg">
+    <div id="modal-box" class="modal-box"></div>
   </div>
 
-  <!-- Sticky Navigation Bar -->
-  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-sky-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
-      <!-- SMARTORA Brand Logo -->
-      <a href="#" class="flex items-center gap-3 group">
-        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-sky-400 via-sky-500 to-blue-700 flex items-center justify-center text-white shadow-lg shadow-sky-500/25 group-hover:scale-105 transition">
-          <svg class="w-7 h-7" viewBox="0 0 36 36" fill="none">
-            <path d="M6 25C10 13 20 7 30 6C28 17 20 25 8 27" stroke="white" stroke-width="2.6" stroke-linecap="round"/>
-            <path d="M10 28C15 21 22 17 29 16C26 23 20 28 10 28Z" fill="white" fill-opacity="0.9"/>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="brand">
+        <div class="brand-icon">
+          <svg width="26" height="26" viewBox="0 0 36 36" fill="none">
+            <path d="M6 25C10 13 20 7 30 6C28 17 20 25 8 27" stroke="white" stroke-width="2.8" stroke-linecap="round"/>
+            <path d="M10 28C15 21 22 17 29 16C26 23 20 28 10 28Z" fill="white"/>
           </svg>
         </div>
         <div>
-          <span class="font-display font-extrabold text-xl tracking-wider text-sky-950 block leading-none">SMARTORA</span>
-          <span class="text-xs text-sky-600 font-medium italic">Your Invisible Protection.</span>
+          <div class="brand-title">SMARTORA</div>
+          <div class="brand-sub">Your Invisible Protection.</div>
         </div>
       </a>
 
-      <!-- Menu Links -->
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-        <a href="#overview" class="hover:text-sky-600 transition">ภาพรวมนวัตกรรม</a>
-        <a href="#care-app" class="hover:text-sky-600 transition">Smartora Care</a>
-        <a href="#senior-app" class="hover:text-sky-600 transition">Smartora Senior</a>
-        <a href="#pillars" class="hover:text-sky-600 transition">จุดเด่นระบบ</a>
+      <nav class="nav-links">
+        <a href="#overview">ภาพรวมเทคโนโลยี</a>
+        <a href="#care-app">Smartora Care</a>
+        <a href="#senior-app">Smartora Senior</a>
+        <a href="#pillars">จุดเด่นระบบ</a>
       </nav>
 
-      <!-- Action Buttons -->
-      <div class="flex items-center gap-2.5">
-        <button onclick="triggerEmergencyDemo()" class="hidden sm:inline-flex items-center gap-1.5 bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 text-xs font-bold px-3.5 py-2.5 rounded-full transition">
-          <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
-          จำลองแจ้งเตือนล้ม
+      <div class="nav-actions">
+        <button onclick="triggerEmergencyDemo()" class="btn-alert-sim">
+          <span class="dot-ping"></span> จำลองแจ้งเตือนล้ม
         </button>
-        <a href="#care-app" class="bg-sky-600 hover:bg-sky-700 text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-md shadow-sky-600/20 transition">
-          ทดลองเล่นแอป
-        </a>
+        <a href="#care-app" class="btn-primary">ทดลองเล่นแอป</a>
       </div>
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section id="overview" class="hero-bg pt-12 pb-20 lg:pt-16 lg:pb-24 border-b border-sky-100 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid lg:grid-cols-12 gap-12 items-center">
-
-        <!-- Left Text Column -->
-        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-sky-200 shadow-sm text-sky-700 text-xs sm:text-sm font-semibold">
-            <span class="w-2.5 h-2.5 rounded-full bg-sky-500 animate-pulse"></span>
-            นวัตกรรมสายรัดข้อมืออัจฉริยะเพื่อผู้สูงอายุและครอบครัว
-          </div>
-
-          <h1 class="text-3xl sm:text-5xl lg:text-[50px] font-bold text-slate-900 leading-tight">
-            “เทคโนโลยีที่มองไม่เห็น<br/>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-blue-600 to-sky-400">
-              แต่ความห่วงใยอยู่ใกล้เสมอ”
-            </span>
-          </h1>
-
-          <p class="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-            <strong>SMARTORA</strong> ดูแลทุกก้าวของคนที่คุณรักด้วยเทคโนโลยีอัจฉริยะ เชื่อมต่อสัญญาณชีพ ความดันโลหิต พิกัด GPS กล้องวงจรปิด และระบบแจ้งเตือนฉุกเฉินอัตโนมัติแบบเรียลไทม์
-          </p>
-
-          <!-- 5 Core Sensors Pills -->
-          <div class="pt-1">
-            <div class="text-xs font-bold text-sky-800 uppercase tracking-wider mb-3">
-              ดูแลทุกก้าวของคนที่คุณรักด้วยเทคโนโลยีอัจฉริยะ
-            </div>
-            <div class="flex flex-wrap justify-center lg:justify-start gap-3">
-              <button onclick="jumpToCareScreen(2)" class="flex items-center gap-2.5 bg-white hover:bg-sky-50 px-4 py-2.5 rounded-2xl border border-sky-100 shadow-sm transition">
-                <span class="w-8 h-8 rounded-xl bg-rose-50 text-rose-500 flex items-center justify-center font-bold">❤️</span>
-                <span class="text-sm font-semibold text-slate-800">ชีพจร</span>
-              </button>
-              <button onclick="jumpToCareScreen(2)" class="flex items-center gap-2.5 bg-white hover:bg-sky-50 px-4 py-2.5 rounded-2xl border border-sky-100 shadow-sm transition">
-                <span class="w-8 h-8 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center font-bold">🩸</span>
-                <span class="text-sm font-semibold text-slate-800">ความดัน</span>
-              </button>
-              <button onclick="jumpToCareScreen(3)" class="flex items-center gap-2.5 bg-white hover:bg-sky-50 px-4 py-2.5 rounded-2xl border border-sky-100 shadow-sm transition">
-                <span class="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">📍</span>
-                <span class="text-sm font-semibold text-slate-800">GPS</span>
-              </button>
-              <button onclick="jumpToCareScreen(4)" class="flex items-center gap-2.5 bg-white hover:bg-sky-50 px-4 py-2.5 rounded-2xl border border-sky-100 shadow-sm transition">
-                <span class="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">📹</span>
-                <span class="text-sm font-semibold text-slate-800">กล้อง</span>
-              </button>
-              <button onclick="jumpToCareScreen(5)" class="flex items-center gap-2.5 bg-white hover:bg-rose-50 px-4 py-2.5 rounded-2xl border border-rose-200 shadow-sm transition">
-                <span class="w-8 h-8 rounded-xl bg-rose-500 text-white flex items-center justify-center text-xs font-extrabold">SOS</span>
-                <span class="text-sm font-semibold text-rose-600">ฉุกเฉิน</span>
-              </button>
-            </div>
-          </div>
+  <!-- Hero Section -->
+  <section id="overview" class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="hero-pill">
+          <span style="width:8px;height:8px;border-radius:50%;background:#0ea5e9;display:inline-block;"></span>
+          นวัตกรรมสายรัดข้อมืออัจฉริยะเพื่อผู้สูงอายุและครอบครัว
         </div>
 
-        <!-- Right Column: High-Detail 3D Vector Wristband Showcase -->
-        <div class="lg:col-span-5 flex justify-center">
-          <div class="relative w-full max-w-md bg-white/90 backdrop-blur-md rounded-[2.5rem] p-7 border border-sky-100 shadow-xl shadow-sky-900/5 text-center">
-            <div class="absolute -top-3.5 right-6 bg-gradient-to-r from-sky-600 to-blue-600 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-md">
-              Smartora Band Gen 2
-            </div>
+        <h1 class="hero-title">
+          “เทคโนโลยีที่มองไม่เห็น<br/>
+          <span>แต่ความห่วงใยอยู่ใกล้เสมอ”</span>
+        </h1>
 
-            <!-- Detailed Realistic Smart Wristband Vector Artwork -->
-            <div class="relative mx-auto w-64 h-64 flex items-center justify-center">
-              <div class="radar-ring absolute w-48 h-48 rounded-full border-2 border-sky-300"></div>
-              <div class="w-52 h-52 rounded-full bg-gradient-to-b from-sky-50 to-white border border-sky-100 flex items-center justify-center shadow-inner">
-                <svg class="w-48 h-48 animate-device drop-shadow-xl" viewBox="0 0 260 260" fill="none">
-                  <defs>
-                    <linearGradient id="bandWhite" x1="40" y1="30" x2="220" y2="230" gradientUnits="userSpaceOnUse">
-                      <stop offset="0%" stop-color="#FFFFFF"/>
-                      <stop offset="55%" stop-color="#F1F5F9"/>
-                      <stop offset="100%" stop-color="#CBD5E1"/>
-                    </linearGradient>
-                    <linearGradient id="bandInner" x1="70" y1="50" x2="190" y2="170" gradientUnits="userSpaceOnUse">
-                      <stop offset="0%" stop-color="#94A3B8"/>
-                      <stop offset="50%" stop-color="#CBD5E1"/>
-                      <stop offset="100%" stop-color="#E2E8F0"/>
-                    </linearGradient>
-                    <linearGradient id="metalClasp" x1="85" y1="115" x2="175" y2="165" gradientUnits="userSpaceOnUse">
-                      <stop offset="0%" stop-color="#F8FAFC"/>
-                      <stop offset="45%" stop-color="#BAE6FD"/>
-                      <stop offset="100%" stop-color="#7DD3FC"/>
-                    </linearGradient>
-                    <pattern id="wovenPattern" width="8" height="8" patternUnits="userSpaceOnUse">
-                      <path d="M0 4L4 0L8 4L4 8Z" fill="#E2E8F0" fill-opacity="0.45"/>
-                    </pattern>
-                  </defs>
+        <p class="hero-desc">
+          <strong>SMARTORA</strong> ดูแลทุกก้าวของคนที่คุณรักด้วยเทคโนโลยีอัจฉริยะ เชื่อมต่อสัญญาณชีพ ความดันโลหิต พิกัด GPS กล้องวงจรปิด และระบบแจ้งเตือนฉุกเฉินอัตโนมัติแบบเรียลไทม์
+        </p>
 
-                  <!-- Soft Floor Shadow -->
-                  <ellipse cx="130" cy="222" rx="68" ry="12" fill="#0284C7" fill-opacity="0.12"/>
+        <div class="sensor-label">ดูแลทุกก้าวของคนที่คุณรักด้วยเทคโนโลยีอัจฉริยะ</div>
+        <div class="sensor-row">
+          <button onclick="jumpToScreen(2)" class="sensor-chip">
+            <span class="chip-icon" style="background:#ffe4e6;">❤️</span> ชีพจร
+          </button>
+          <button onclick="jumpToScreen(2)" class="sensor-chip">
+            <span class="chip-icon" style="background:#e0f2fe;">🩸</span> ความดัน
+          </button>
+          <button onclick="jumpToScreen(3)" class="sensor-chip">
+            <span class="chip-icon" style="background:#dbeafe;">📍</span> GPS
+          </button>
+          <button onclick="jumpToScreen(4)" class="sensor-chip">
+            <span class="chip-icon" style="background:#e0e7ff;">📹</span> กล้อง
+          </button>
+          <button onclick="jumpToScreen(5)" class="sensor-chip sos">
+            <span class="chip-icon" style="background:#f43f5e;color:#fff;font-size:11px;font-weight:800;">SOS</span> ฉุกเฉิน
+          </button>
+        </div>
+      </div>
 
-                  <!-- Back Inner Loop of Wristband -->
-                  <path d="M62 118 C62 52, 198 52, 198 118 C198 158, 172 182, 130 182 C88 182, 62 158, 62 118 Z" fill="url(#bandInner)" stroke="#94A3B8" stroke-width="2"/>
+      <!-- Luxury 3D Smartora Wristband Showcase -->
+      <div class="product-card">
+        <div class="product-badge">Smartora Band Gen 2</div>
+        <div class="wristband-stage">
+          <svg class="wristband-svg" viewBox="0 0 280 280" fill="none">
+            <defs>
+              <linearGradient id="strapOuter" x1="45" y1="40" x2="235" y2="230" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#FFFFFF"/>
+                <stop offset="50%" stop-color="#F1F5F9"/>
+                <stop offset="100%" stop-color="#CBD5E1"/>
+              </linearGradient>
+              <linearGradient id="strapInner" x1="70" y1="60" x2="210" y2="190" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#94A3B8"/>
+                <stop offset="50%" stop-color="#CBD5E1"/>
+                <stop offset="100%" stop-color="#E2E8F0"/>
+              </linearGradient>
+              <linearGradient id="silverClasp" x1="88" y1="128" x2="192" y2="176" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#FFFFFF"/>
+                <stop offset="35%" stop-color="#E0F2FE"/>
+                <stop offset="70%" stop-color="#7DD3FC"/>
+                <stop offset="100%" stop-color="#0284C7"/>
+              </linearGradient>
+              <pattern id="leatherTex" width="7" height="7" patternUnits="userSpaceOnUse">
+                <path d="M0 3.5L3.5 0L7 3.5L3.5 7Z" fill="#CBD5E1" fill-opacity="0.38"/>
+              </pattern>
+            </defs>
 
-                  <!-- Outer White Textured Wristband Body -->
-                  <path d="M52 126 C52 68, 208 68, 208 126 C208 178, 174 202, 130 202 C86 202, 52 178, 52 126 Z" fill="url(#bandWhite)" stroke="#BAE6FD" stroke-width="2.5"/>
-                  <path d="M52 126 C52 68, 208 68, 208 126 C208 178, 174 202, 130 202 C86 202, 52 178, 52 126 Z" fill="url(#wovenPattern)"/>
+            <!-- Soft Shadow -->
+            <ellipse cx="140" cy="242" rx="76" ry="13" fill="#0284C7" fill-opacity="0.14"/>
 
-                  <!-- Stitching Lines -->
-                  <path d="M56 122 C65 152, 195 152, 204 122" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="3 3"/>
-                  <path d="M58 156 C75 182, 185 182, 202 156" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="3 3"/>
+            <!-- Back Band Loop -->
+            <path d="M66 128 C66 56, 214 56, 214 128 C214 172, 184 198, 140 198 C96 198, 66 172, 66 128 Z" fill="url(#strapInner)" stroke="#94A3B8" stroke-width="2"/>
 
-                  <!-- Brushed Sky-Silver Smart Clasp -->
-                  <rect x="86" y="124" width="88" height="40" rx="14" fill="url(#metalClasp)" stroke="#38BDF8" stroke-width="2"/>
-                  <rect x="91" y="129" width="78" height="30" rx="10" fill="white" fill-opacity="0.55"/>
+            <!-- Front White Leather Strap -->
+            <path d="M54 138 C54 74, 226 74, 226 138 C226 194, 188 220, 140 220 C92 220, 54 194, 54 138 Z" fill="url(#strapOuter)" stroke="#BAE6FD" stroke-width="2.5"/>
+            <path d="M54 138 C54 74, 226 74, 226 138 C226 194, 188 220, 140 220 C92 220, 54 194, 54 138 Z" fill="url(#leatherTex)"/>
 
-                  <!-- Engraved SMARTORA Leaf Logo on Clasp -->
-                  <path d="M114 149C119 139 128 134 138 133C136 142 129 149 116 151" stroke="#0284C7" stroke-width="2.4" stroke-linecap="round"/>
-                  <path d="M119 152C124 146 131 143 138 142C135 148 129 152 119 152Z" fill="#0284C7"/>
+            <!-- Fine Stitching -->
+            <path d="M58 134 C68 166, 212 166, 222 134" stroke="#94A3B8" stroke-width="1.3" stroke-dasharray="3 3"/>
+            <path d="M62 170 C82 198, 198 198, 218 170" stroke="#94A3B8" stroke-width="1.3" stroke-dasharray="3 3"/>
 
-                  <!-- Decorative Silver & Sky-Blue Charm -->
-                  <circle cx="110" cy="166" r="3.5" fill="#64748B"/>
-                  <line x1="110" y1="169" x2="110" y2="192" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
-                  <line x1="101" y1="180" x2="119" y2="180" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
-                  <circle cx="110" cy="180" r="4.5" fill="#0EA5E9" stroke="white" stroke-width="1.5"/>
-                </svg>
-              </div>
-            </div>
+            <!-- Metallic Smart Clasp -->
+            <rect x="92" y="134" width="96" height="44" rx="15" fill="url(#silverClasp)" stroke="#38BDF8" stroke-width="2"/>
+            <rect x="97" y="139" width="86" height="34" rx="11" fill="#FFFFFF" fill-opacity="0.65"/>
 
-            <div class="mt-2 space-y-1">
-              <h3 class="font-bold text-slate-900 text-lg">สายรัดข้อมืออัจฉริยะ Smartora</h3>
-              <p class="text-xs text-slate-500">ดีไซน์เหมือนเครื่องประดับ สวมใส่สบาย • ตรวจจับการล้มอัตโนมัติ 24 ชม.</p>
-            </div>
+            <!-- Engraved Smartora Leaf Logo -->
+            <path d="M123 162C128 150 138 144 150 143C148 154 140 162 125 164" stroke="#0284C7" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M129 165C135 158 142 154 150 153C147 160 140 165 129 165Z" fill="#0284C7"/>
 
-            <!-- Live Status Bar inside Product Card -->
-            <div class="mt-5 bg-sky-50 border border-sky-100 rounded-2xl p-3.5 grid grid-cols-3 gap-2 text-xs">
-              <div>
-                <span class="text-slate-400 block text-[11px]">การเชื่อมต่อ</span>
-                <span class="font-bold text-sky-700 flex items-center justify-center gap-1 mt-0.5">
-                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span> ออนไลน์
-                </span>
-              </div>
-              <div class="border-x border-sky-200/70">
-                <span class="text-slate-400 block text-[11px]">ชีพจรล่าสุด</span>
-                <span class="font-extrabold text-slate-800 mt-0.5 block">78 BPM</span>
-              </div>
-              <div>
-                <span class="text-slate-400 block text-[11px]">แบตเตอรี่</span>
-                <span class="font-extrabold text-sky-700 mt-0.5 block">94%</span>
-              </div>
-            </div>
-          </div>
+            <!-- Signature Clover Charm -->
+            <circle cx="118" cy="180" r="4" fill="#64748B"/>
+            <line x1="118" y1="184" x2="118" y2="210" stroke="#64748B" stroke-width="2.2" stroke-linecap="round"/>
+            <line x1="107" y1="197" x2="129" y2="197" stroke="#64748B" stroke-width="2.2" stroke-linecap="round"/>
+            <circle cx="118" cy="191" r="4.5" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.4"/>
+            <circle cx="118" cy="203" r="4.5" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.4"/>
+            <circle cx="112" cy="197" r="4.5" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.4"/>
+            <circle cx="124" cy="197" r="4.5" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.4"/>
+            <circle cx="118" cy="197" r="3" fill="#0EA5E9"/>
+          </svg>
         </div>
 
+        <div class="product-title">สายรัดข้อมืออัจฉริยะ Smartora</div>
+        <div class="product-sub">ดีไซน์เรียบหรูเหมือนเครื่องประดับ • กันน้ำ IP68 • ตรวจจับการล้มอัตโนมัติ</div>
+
+        <div class="product-stats">
+          <div>
+            <span class="stat-lbl">สถานะ</span>
+            <span class="stat-val" style="color:#0284c7;">● ออนไลน์</span>
+          </div>
+          <div>
+            <span class="stat-lbl">ชีพจรล่าสุด</span>
+            <span class="stat-val">78 BPM</span>
+          </div>
+          <div>
+            <span class="stat-lbl">แบตเตอรี่</span>
+            <span class="stat-val" style="color:#0284c7;">94%</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 1: SMARTORA CARE (สำหรับลูกหลานและผู้ดูแล - 8 หน้าจอ) -->
-  <section id="care-app" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-      <!-- Section Badge & Title -->
-      <div class="text-center max-w-3xl mx-auto mb-14">
-        <div class="inline-flex items-center gap-2.5 bg-gradient-to-r from-sky-600 to-blue-600 text-white px-6 py-2.5 rounded-full shadow-lg shadow-sky-600/20 mb-4">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
-          </svg>
-          <span class="font-bold tracking-wide text-sm sm:text-base">SMARTORA CARE</span>
-        </div>
-        <h2 class="text-2xl sm:text-4xl font-bold text-slate-900">สำหรับลูกหลานและผู้ดูแล (ครบทั้ง 8 หน้าจอ)</h2>
-        <p class="text-slate-500 mt-3 text-sm sm:text-base">
-          คลิกเลือกการ์ดทั้ง 8 ฟังก์ชันด้านขวา หรือกดปุ่มบนหน้าจอมือถือจำลองด้านซ้ายเพื่อทดลองใช้งานจริง
+  <!-- Section 1: SMARTORA CARE -->
+  <section id="care-app" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-pill">👨‍👩‍👧 SMARTORA CARE</div>
+        <h2 class="section-title">สำหรับลูกหลานและผู้ดูแล (ครบทั้ง 8 หน้าจอ)</h2>
+        <p class="section-desc">
+          คลิกเลือกฟังก์ชันทั้ง 8 หน้าจอด้านขวา หรือกดปุ่มบนหน้าจอมือถือด้านซ้ายเพื่อทดลองใช้งานจริง
         </p>
       </div>
 
-      <!-- Simulator Grid -->
-      <div class="grid lg:grid-cols-12 gap-10 items-start">
-
-        <!-- Left: Interactive Phone Screen -->
-        <div class="lg:col-span-5 flex flex-col items-center lg:sticky lg:top-24">
-          <div class="w-[330px] sm:w-[350px] h-[680px] bg-slate-50 rounded-[3rem] phone-frame border border-sky-200 overflow-hidden flex flex-col relative">
-
-            <!-- iOS Style Status Bar -->
-            <div class="bg-white px-6 pt-3.5 pb-2 flex items-center justify-between text-[11px] font-bold text-slate-800 shrink-0">
+      <div class="simulator-grid">
+        <!-- Left Interactive Phone -->
+        <div class="phone-column">
+          <div class="phone-device">
+            <div class="phone-statusbar">
               <span>9:41</span>
-              <div class="w-24 h-4 bg-slate-900 rounded-full"></div>
-              <div class="flex items-center gap-1.5">
-                <span>5G</span>
-                <div class="w-5 h-2.5 border border-slate-800 rounded-sm p-0.5">
-                  <div class="bg-slate-800 h-full w-4/5"></div>
-                </div>
-              </div>
+              <div class="phone-notch"></div>
+              <span>5G 🔋</span>
             </div>
 
-            <!-- Dynamic Phone Content Area -->
-            <div id="care-phone-body" class="flex-1 overflow-y-auto phone-scroll bg-slate-50 p-4 space-y-3">
-              <!-- Rendered via JavaScript -->
-            </div>
+            <div id="care-body" class="phone-body"></div>
 
-            <!-- Bottom Tab Navigation -->
-            <div class="bg-white border-t border-slate-100 px-2 py-2.5 grid grid-cols-5 text-[10px] font-medium text-slate-400 shrink-0">
-              <button onclick="setCareScreen(1)" id="tab-1" class="care-tab flex flex-col items-center gap-1 text-sky-600 font-bold">
-                <span class="text-base">🏠</span>
-                <span>หน้าหลัก</span>
+            <div class="phone-bottom-nav">
+              <button onclick="renderCare(1)" id="nav-1" class="p-tab active">
+                <span class="p-tab-ico">🏠</span><span>หน้าหลัก</span>
               </button>
-              <button onclick="setCareScreen(2)" id="tab-2" class="care-tab flex flex-col items-center gap-1 hover:text-sky-600">
-                <span class="text-base">💓</span>
-                <span>สุขภาพ</span>
+              <button onclick="renderCare(2)" id="nav-2" class="p-tab">
+                <span class="p-tab-ico">💓</span><span>สุขภาพ</span>
               </button>
-              <button onclick="setCareScreen(3)" id="tab-3" class="care-tab flex flex-col items-center gap-1 hover:text-sky-600">
-                <span class="text-base">📍</span>
-                <span>ตำแหน่ง</span>
+              <button onclick="renderCare(3)" id="nav-3" class="p-tab">
+                <span class="p-tab-ico">📍</span><span>ตำแหน่ง</span>
               </button>
-              <button onclick="setCareScreen(6)" id="tab-6" class="care-tab flex flex-col items-center gap-1 hover:text-sky-600">
-                <span class="text-base">💊</span>
-                <span>เตือนยา</span>
+              <button onclick="renderCare(6)" id="nav-6" class="p-tab">
+                <span class="p-tab-ico">💊</span><span>เตือนยา</span>
               </button>
-              <button onclick="setCareScreen(8)" id="tab-8" class="care-tab flex flex-col items-center gap-1 hover:text-sky-600">
-                <span class="text-base">📊</span>
-                <span>รายงาน</span>
+              <button onclick="renderCare(8)" id="nav-8" class="p-tab">
+                <span class="p-tab-ico">📊</span><span>รายงาน</span>
               </button>
             </div>
           </div>
-
-          <div id="active-screen-badge" class="mt-5 text-sm font-bold text-sky-800 bg-sky-50 px-5 py-2 rounded-full border border-sky-200 shadow-sm">
-            กำลังแสดง: 1. หน้าหลัก Dashboard
-          </div>
+          <div id="screen-label" class="active-caption">กำลังแสดง: 1. หน้าหลัก Dashboard</div>
         </div>
 
-        <!-- Right: 8 Screen Selector Cards -->
-        <div class="lg:col-span-7">
-          <div class="grid sm:grid-cols-2 gap-4">
+        <!-- Right 8 Feature Cards -->
+        <div class="cards-grid">
+          <button onclick="renderCare(1)" data-idx="1" class="feature-card selected">
+            <div class="fc-top"><span class="fc-badge">หน้าจอ 1</span><span>🏠</span></div>
+            <div class="fc-title">1. หน้าหลัก Dashboard</div>
+            <div class="fc-desc">สรุปสถานะความปลอดภัย ชีพจร 78 BPM ความดัน 120/80 SpO₂ 98% ตำแหน่งล่าสุด และปุ่มลัดครบในหน้าเดียว</div>
+          </button>
 
-            <button onclick="setCareScreen(1)" data-card="1" class="care-card text-left p-4 rounded-2xl border-2 border-sky-500 bg-sky-50/70 transition shadow-sm">
-              <div class="flex items-center justify-between mb-1.5">
-                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-sky-600 text-white">หน้าจอ 1</span>
-                <span class="text-lg">🏠</span>
-              </div>
-              <h3 class="font-bold text-slate-900 text-base">1. หน้าหลัก Dashboard</h3>
-              <p class="text-xs text-slate-600 mt-1">สรุปสถานะปลอดภัย ชีพจร 78 BPM ความดัน 120/80 SpO₂ 98% และปุ่มลัดครบในหน้าเดียว</p>
-            </button>
+          <button onclick="renderCare(2)" data-idx="2" class="feature-card">
+            <div class="fc-top"><span class="fc-badge">หน้าจอ 2</span><span>📈</span></div>
+            <div class="fc-title">2. หน้าข้อมูลสุขภาพ</div>
+            <div class="fc-desc">กราฟวิเคราะห์แนวโน้มชีพจร ความดันโลหิต และออกซิเจนในเลือด กดสลับดู 7 วัน / 30 วัน ได้จริง</div>
+          </button>
 
-            <button onclick="setCareScreen(2)" data-card="2" class="care-card text-left p-4 rounded-2xl border border-slate-200 bg-white hover:border-sky-300 transition hover:shadow-md">
-              <div class="flex items-center justify-between mb-1.5">
-                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-700">หน้าจอ 2</span>
-                <span class="text-lg">📈</span>
-              </div>
-              <h3 class="font-bold text-slate-900 text-base">2. หน้าข้อมูลสุขภาพ</h3>
-              <p class="text-xs text-slate-600 mt-1">ดูกราฟแนวโน้มชีพจร ความดันโลหิต และออกซิเจนในเลือด (กดสลับดู 7 วัน / 30 วัน ได้จริง)</p>
-            </button>
+          <button onclick="renderCare(3)" data-idx="3" class="feature-card">
+            <div class="fc-top"><span class="fc-badge">หน้าจอ 3</span><span>🗺️</span></div>
+            <div class="fc-title">3. หน้าติดตามตำแหน่ง GPS</div>
+            <div class="fc-desc">แผนที่ระบุตำแหน่งปัจจุบันของคุณแม่ พร้อมวงพื้นที่ปลอดภัย (Safe Zone) และระบบนำทาง</div>
+          </button>
 
-            <button onclick="setCareScreen(3)" data-card="3" class="care-card text-left p-4 rounded-2xl border border-slate-200 bg-white hover:border-sky-300 transition hover:shadow-md">
-              <div class="flex items-center justify-between mb-1.5">
-                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-700">หน้าจอ 3</span>
-                <span class="text-lg">🗺️</span>
-              </div>
-              <h3 class="font-bold text-slate-900 text-base">3. หน้าติดตามตำแหน่ง</h3>
-              <p class="text-xs text-slate-600 mt-1">แผนที่ระบุตำแหน่งปัจจุบันของคุณแม่ พร้อมวงรัศมีพื้นที่ปลอดภัย (Safe Zone) และระบบนำทาง</p>
-            </button>
+          <button onclick="renderCare(4)" data-idx="4" class="feature-card">
+            <div class="fc-top"><span class="fc-badge">หน้าจอ 4</span><span>📹</span></div>
+            <div class="fc-title">4. หน้ากล้องวงจรปิด CCTV</div>
+            <div class="fc-desc">ภาพสดจากกล้องภายในบ้าน กดเปลี่ยนมุมกล้องได้ทั้ง หน้าบ้าน ห้องนั่งเล่น และห้องครัว</div>
+          </button>
 
-            <button onclick="setCareScreen(4)" data-card="4" class="care-card text-left p-4 rounded-2xl border border-slate-200 bg-white hover:border-sky-300 transition hover:shadow-md">
-              <div class="flex items-center justify-between mb-1.5">
-                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-700">หน้าจอ 4</span>
-                <span class="text-lg">📹</span>
-              </div>
-              <h3 class="font-bold text-slate-900 text-base">4. หน้ากล้องวงจรปิด CCTV</h3>
-              <p class="text-xs text-slate-600 mt-1">ภาพสดจากกล้องในบ้าน กดเปลี่ยนมุมกล้องได้ทั้ง หน้าบ้าน ห้องนั่งเล่น และห้องครัว</p>
-            </button>
+          <button onclick="renderCare(5)" data-idx="5" class="feature-card">
+            <div class="fc-top"><span class="fc-badge danger">หน้าจอ 5</span><span>🚨</span></div>
+            <div class="fc-title">5. หน้าแจ้งเตือนฉุกเฉิน</div>
+            <div class="fc-desc">แจ้งเตือนทันทีเมื่อตรวจพบการหกล้ม ระบุเวลา พิกัด และกดโทรหาผู้ดูแลได้ทันที</div>
+          </button>
 
-            <button onclick="setCareScreen(5)" data-card="5" class="care-card text-left p-4 rounded-2xl border border-slate-200 bg-white hover:border-rose-300 transition hover:shadow-md">
-              <div class="flex items-center justify-between mb-1.5">
-                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700">หน้าจอ 5</span>
-                <span class="text-lg">🚨</span>
-              </div>
-              <h3 class="font-bold text-slate-900 text-base">5. หน้าแจ้งเตือนฉุกเฉิน</h3>
-              <p class="text-xs text-slate-600 mt-1">แจ้งเตือนฉุกเฉินทันทีเมื่อตรวจพบการหกล้ม ระบุเวลา พิกัด และกดโทรหาผู้ดูแลได้ทันที</p>
-            </button>
+          <button onclick="renderCare(6)" data-idx="6" class="feature-card">
+            <div class="fc-top"><span class="fc-badge">หน้าจอ 6</span><span>💊</span></div>
+            <div class="fc-title">6. หน้าตารางเตือนยา</div>
+            <div class="fc-desc">เช็กสถานะการทานยาประจำวัน (ยาความดัน 08:00 น. / ยาลดไขมัน 20:00 น.) กดอัปเดตสถานะได้</div>
+          </button>
 
-            <button onclick="setCareScreen(6)" data-card="6" class="care-card text-left p-4 rounded-2xl border border-slate-200 bg-white hover:border-sky-300 transition hover:shadow-md">
-              <div class="flex items-center justify-between mb-1.5">
-                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-700">หน้าจอ 6</span>
-                <span class="text-lg">💊</span>
-              </div>
-              <h3 class="font-bold text-slate-900 text-base">6. หน้าตารางเตือนยา</h3>
-              <p class="text-xs text-slate-600 mt-1">เช็กสถานะการทานยาประจำวัน (ยาความดัน 08:00 น. / ยาลดไขมัน 20:00 น.) กดอัปเดตสถานะได้</p>
-            </button>
+          <button onclick="renderCare(7)" data-idx="7" class="feature-card">
+            <div class="fc-top"><span class="fc-badge">หน้าจอ 7</span><span>👨‍👩‍👧</span></div>
+            <div class="fc-title">7. หน้าจัดการผู้ดูแล</div>
+            <div class="fc-desc">จัดการรายชื่อสมาชิกในครอบครัว (คุณลูกสาว คุณหลานชาย ผู้ดูแลใกล้บ้าน) และเพิ่มผู้ดูแลใหม่ได้</div>
+          </button>
 
-            <button onclick="setCareScreen(7)" data-card="7" class="care-card text-left p-4 rounded-2xl border border-slate-200 bg-white hover:border-sky-300 transition hover:shadow-md">
-              <div class="flex items-center justify-between mb-1.5">
-                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-700">หน้าจอ 7</span>
-                <span class="text-lg">👨‍👩‍👧</span>
-              </div>
-              <h3 class="font-bold text-slate-900 text-base">7. หน้าจัดการผู้ดูแล</h3>
-              <p class="text-xs text-slate-600 mt-1">จัดการรายชื่อสมาชิกในครอบครัว (คุณลูกสาว คุณหลานชาย ผู้ดูแลใกล้บ้าน) และเพิ่มผู้ดูแลใหม่ได้จริง</p>
-            </button>
-
-            <button onclick="setCareScreen(8)" data-card="8" class="care-card text-left p-4 rounded-2xl border border-slate-200 bg-white hover:border-sky-300 transition hover:shadow-md">
-              <div class="flex items-center justify-between mb-1.5">
-                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-700">หน้าจอ 8</span>
-                <span class="text-lg">📋</span>
-              </div>
-              <h3 class="font-bold text-slate-900 text-base">8. หน้าประวัติและรายงาน</h3>
-              <p class="text-xs text-slate-600 mt-1">สรุปผลสุขภาพรายสัปดาห์ (ชีพจรปกติ 6 วัน, ความดันปกติ 5 วัน) พร้อมกดดูตัวอย่างรายงานส่งแพทย์</p>
-            </button>
-
-          </div>
+          <button onclick="renderCare(8)" data-idx="8" class="feature-card">
+            <div class="fc-top"><span class="fc-badge">หน้าจอ 8</span><span>📋</span></div>
+            <div class="fc-title">8. หน้าประวัติและรายงาน</div>
+            <div class="fc-desc">สรุปสุขภาพรายสัปดาห์ (ชีพจรปกติ 6 วัน, ความดันปกติ 5 วัน) พร้อมกดดูรายงานส่งแพทย์</div>
+          </button>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- SECTION 2: SMARTORA SENIOR (สำหรับผู้สูงอายุ - 3 หน้าจอ) -->
-  <section id="senior-app" class="py-20 bg-gradient-to-b from-sky-50 via-blue-50/40 to-white border-t border-sky-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Section 2: SMARTORA SENIOR -->
+  <section id="senior-app" class="section section-sky">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-pill" style="background:linear-gradient(135deg,#0369a1,#0284c7);">🧓 SMARTORA SENIOR</div>
+        <h2 class="section-title">โหมดสำหรับผู้สูงอายุ (ปุ่มใหญ่ ใช้งานง่าย)</h2>
+        <p class="section-desc">
+          ทดลองกดปุ่มบนหน้าจอผู้สูงอายุทั้ง 3 เครื่องด้านล่างได้จริง ทั้งปุ่มโทรหาลูกหลาน ปุ่มขอความช่วยเหลือ SOS และปุ่มยืนยันการทานยา
+        </p>
+      </div>
 
-      <div class="text-center max-w-3xl mx-auto mb-14">
-        <div class="inline-flex items-center gap-2.5 bg-sky-700 text-white px-6 py-2.5 rounded-full shadow-lg shadow-sky-700/20 mb-4">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11
+      <div id="senior-wrapper" class="senior-grid">
+        <!-- Senior Screen 1 -->
+        <div class="senior-item">
+          <div class="senior-phone">
+            <div class="phone-statusbar">
+              <span>9:41</span><div class="phone-notch"></div><span>5G 🔋</span>
+            </div>
+            <div style="padding:18px;flex:1;display:flex;flex-direction:column;justify-content:space-between;text-align:center;">
+              <div>
+                <div style="width:46px;height:46px;margin:0 auto 8px;border-radius:14px;background:linear-gradient(135deg,#38bdf8,#0284c7);display:flex;align-items:center;justify-content:center;">
+                  <svg width="26" height="26" viewBox="0 0 36 36" fill="none">
+                    <path d="M6 25C10 13 20 7 30 6C28 17 20 25 8 27" stroke="white" stroke-width="2.8" stroke-linecap="round"/>
+                    <path d="M10 28C15 21 22 17 29 16C26 23 20 28 10 28Z" fill="white"/>
+                  </svg>
+                </div>
+                <div style="font-size:11px;font-weight:800;color:#0369a1;letter-spacing:0.08em;">SMARTORA</div>
+                <h4 class="s-title" style="font-size:18px;font-weight:700;color:#0f172a;margin-top:6px;">
+                  สวัสดีค่ะ คุณยาย<br/>ดูแลตัวเองนะคะ 💙
+                </h4>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0;">
+                <button onclick="openCallModal('คุณลูกสาว')" style="background:#0284c7;color:#fff;border:none;border-radius:18px;padding:16px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:0 8px 18px rgba(2,132,199,0.28);font-family:inherit;">
+                  <span style="font-size:28px;">📞</span>
+                  <span class="s-btn-lbl" style="font-size:13px;font-weight:700;">โทรหาลูกหลาน</span>
+                </button>
+                <button onclick="triggerEmergencyDemo()" style="background:#f43f5e;color:#fff;border:none;border-radius:18px;padding:16px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:0 8px 18px rgba(244,63,94,0.28);font-family:inherit;">
+                  <span style="background:#fff;color:#e11d48;font-size:11px;font-weight:800;padding:4px 10px;border-radius:8px;">SOS</span>
+                  <span class="s-btn-lbl" style="font-size:13px;font-weight:700;">ขอความช่วยเหลือ</span>
+                </button>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:10px;border-top:1px solid #f1f5f9;">
+                <button onclick="showToast('สุขภาพของคุณยายวันนี้: ชีพจร 78 BPM ปกติดีค่ะ ❤️')" style="background:#f0f9ff;border:none;border-radius:14px;padding:11px 6px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;font-family:inherit;">
+                  <span style="font-size:18px;">❤️</span>
+                  <span style="font-size:11px;font-weight:700;color:#334155;">ดูสุขภาพของฉัน</span>
+                </button>
+                <button onclick="showToast('มียาลดไขมันเวลา 20:00 น. รอการยืนยันค่ะ 💊')" style="background:#eff6ff;border:none;border-radius:14px;padding:11px 6px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;font-family:inherit;">
+                  <span style="font-size:18px;">💊</span>
+                  <span style="font-size:11px;font-weight:700;color:#334155;">ตารางยา</span>
+                </button>
+                <button onclick="openMessageModal()" style="background:#f8fafc;border:none;border-radius:14px;padding:11px 6px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;font-family:inherit;">
+                  <span style="font-size:18px;">💬</span>
+                  <span style="font-size:11px;font-weight:700;color:#334155;">ข้อความ (1)</span>
+                </button>
+                <button onclick="toggleLargeText()" style="background:#f8fafc;border:none;border-radius:14px;padding:11px 6px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;font-family:inherit;">
+                  <span style="font-size:18px;">🔍</span>
+                  <span style="font-size:11px;font-weight:700;color:#334155;">ตัวอักษรใหญ่</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="senior-caption">1. หน้าแรกสำหรับผู้สูงอายุ</div>
+        </div>
+
+        <!-- Senior Screen 2 -->
+        <div class="senior-item">
+          <div class="senior-phone">
+            <div class="phone-statusbar">
+              <span>9:41</span><div class="phone-notch"></div><span>5G 🔋</span>
+            </div>
+            <div style="padding:18px;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
+              <div style="display:flex;align-items:center;border-bottom:1px solid #f1f5f9;padding-bottom:10px;">
+                <span style="color:#0284c7;font-weight:700;font-size:18px;">‹</span>
+                <div style="flex:1;text-align:center;font-weight:700;font-size:15px;">สุขภาพของฉัน</div>
+              </div>
+
+              <div style="background:linear-gradient(135deg,#fff1f2,#ffffff);border:1px solid #ffe4e6;border-radius:22px;padding:18px;display:flex;align-items:center;justify-content:space-between;">
+                <div style="width:56px;height:56px;border-radius:16px;background:#f43f5e;color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;">❤️</div>
+                <div style="text-align:right;">
+                  <div style="font-size:36px;font-weight:800;color:#0f172a;line-height:1;">78</div>
+                  <div style="font-size:11px;font-weight:700;color:#94a3b8;margin-top:2px;">BPM</div>
+                  <span style="display:inline-block;background:#e0f2fe;color:#0369a1;font-size:11px;font-weight:700;padding:2px 10px;border-radius:999px;margin-top:4px;">✓ ปกติ</span>
+                </div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <div style="background:#f0f9ff;border:1px solid #e0f2fe;border-radius:18px;padding:14px;text-align:center;">
+                  <div style="font-size:22px;margin-bottom:4px;">🩸</div>
+                  <div style="font-size:17px;font-weight:800;color:#0f172a;">120 / 80</div>
+                  <div style="font-size:11px;color:#64748b;">mmHg</div>
+                </div>
+                <div style="background:#eff6ff;border:1px solid #dbeafe;border-radius:18px;padding:14px;text-align:center;">
+                  <div style="font-size:22px;margin-bottom:4px;">💧</div>
+                  <div style="font-size:17px;font-weight:800;color:#0f172a;">98%</div>
+                  <div style="font-size:11px;color:#64748b;">SpO₂</div>
+                </div>
+              </div>
+
+              <div style="background:linear-gradient(135deg,#0ea5e9,#2563eb);color:#fff;border-radius:18px;padding:14px;text-align:center;">
+                <div class="s-btn-lbl" style="font-size:13px;font-weight:700;">สุขภาพของคุณอยู่ในเกณฑ์ปกติ</div>
+                <div style="font-size:22px;margin-top:2px;">😊</div>
+              </div>
+            </div>
+          </div>
+          <div class="senior-caption">2. หน้าสุขภาพของฉัน</div>
+        </div>
+
+        <!-- Senior Screen 3 -->
+        <div class="senior-item">
+          <div class="senior-phone">
+            <div class="phone-statusbar">
+              <span>9:41</span><div class="phone-notch"></div><span>5G 🔋</span>
+            </div>
+            <div style="padding:18px;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
+              <div style="display:flex;align-items:center;border-bottom:1px solid #f1f5f9;padding-bottom:10px;">
+                <span style="color:#0284c7;font-weight:700;font-size:18px;">‹</span>
+                <div style="flex:1;text-align:center;font-weight:700;font-size:15px;">ตารางยา</div>
+              </div>
+
+              <div style="display:flex;flex-direction:column;gap:14px;margin:auto 0;">
+                <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;padding:14px;">
+                  <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+                    <div style="width:44px;height:44px;border-radius:12px;background:#e0f2fe;display:flex;align-items:center;justify-content:center;font-size:20px;">💊</div>
+                    <div>
+                      <div class="s-btn-lbl" style="font-weight:700;font-size:15px;color:#0f172a;">ยาความดัน</div>
+                      <div style="font-size:12px;color:#64748b;">เวลา 08:00 น.</div>
+                    </div>
+                  </div>
+                  <div style="background:#0284c7;color:#fff;font-size:12px;font-weight:700;padding:10px;border-radius:12px;text-align:center;">
+                    ✓ รับประทานแล้ว เมื่อ 08:15 น.
+                  </div>
+                </div>
+
+                <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;padding:14px;">
+                  <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+                    <div style="width:44px;height:44px;border-radius:12px;background:#fef3c7;display:flex;align-items:center;justify-content:center;font-size:20px;">💊</div>
+                    <div>
+                      <div class="s-btn-lbl" style="font-weight:700;font-size:15px;color:#0f172a;">ยาลดไขมัน</div>
+                      <div style="font-size:12px;color:#64748b;">เวลา 20:00 น.</div>
+                    </div>
+                  </div>
+                  <button id="senior-med-btn" onclick="toggleMedSync()" style="width:100%;background:#fffbeb;border:2px solid #fde68a;color:#b45309;font-size:12px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;font-family:inherit;">
+                    🕒 รอการยืนยัน (กดเพื่อยืนยัน)
+                  </button>
+                </div>
+              </div>
+
+              <div style="text-align:center;font-size:11px;color:#94a3b8;">
+                เมื่อคุณยายกดยืนยัน ระบบจะแจ้งเตือนลูกหลานทันที
+              </div>
+            </div>
+          </div>
+          <div class="senior-caption">3. หน้าตารางยา</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 Pillars -->
+  <section id="pillars" class="section" style="padding:56px 0;border-top:1px solid var(--sky-100);">
+    <div class="container pillars-grid">
+      <div class="pillar-box">
+        <div class="pillar-ico">🛡️</div>
+        <div><h3>ปลอดภัย</h3><p>ข้อมูลเป็นส่วนตัว เข้ารหัสมาตรฐาน</p></div>
+      </div>
+      <div class="pillar-box">
+        <div class="pillar-ico">🎯</div>
+        <div><h3>แม่นยำ</h3><p>ด้วยเทคโนโลยีเซนเซอร์ที่ทันสมัย</p></div>
+      </div>
+      <div class="pillar-box">
+        <div class="pillar-ico">🔔</div>
+        <div><h3>แจ้งเตือนทันที</h3><p>ดูแลได้แม้ไกลกัน อุ่นใจ 24 ชม.</p></div>
+      </div>
+      <div class="pillar-box">
+        <div class="pillar-ico">💙</div>
+        <div><h3>ใช้งานง่าย</h3><p>ออกแบบมาให้เหมาะสำหรับทุกวัย</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;">
+          <svg width="24" height="24" viewBox="0 0 36 36" fill="none">
+            <path d="M6 25C10 13 20 7 30 6C28 17 20 25 8 27" stroke="white" stroke-width="2.8" stroke-linecap="round"/>
+            <path d="M10 28C15 21 22 17 29 16C26 23 20 28 10 28Z" fill="white"/>
+          </svg>
+        </div>
+        <div>
+          <div style="font-weight:800;font-size:19px;letter-spacing:0.06em;">SMARTORA</div>
+          <div style="font-size:12px;color:#bae6fd;">ดูแลด้วยเทคโนโลยี ห่วงใยด้วยหัวใจ</div>
+        </div>
+      </div>
+      <div style="font-size:13px;color:rgba(186,230,253,0.85);">
+        © 2026 SMARTORA — Your Invisible Protection. All rights reserved.
+      </div>
+      <div class="footer-links">
+        <a href="#overview">หน้าแรก</a>
+        <a href="#care-app">Smartora Care</a>
+        <a href="#senior-app">Smartora Senior</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Toast Helper
+    let toastTimer;
+    function showToast(msg) {
+      const el = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = msg;
+      el.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove('show'), 3200);
+    }
+
+    // Modal Helper
+    function openModal(html) {
+      document.getElementById('modal-box').innerHTML = html;
+      document.getElementById('modal-bg').classList.add('open');
+    }
+    function closeModal() {
+      document.getElementById('modal-bg').classList.remove('open');
+    }
+    document.getElementById('modal-bg').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+
+    // Embedded Portraits (100% Reliable)
+    function grandmaSVG(w, h) {
+      return '<svg width="' + w + '" height="' + h + '" style="border-radius:50%;border:2px solid #bae6fd;flex-shrink:0;" viewBox="0 0 80 80" fill="none">' +
+        '<circle cx="40" cy="40" r="40" fill="#e0f2fe"/>' +
+        '<circle cx="40" cy="16" r="11" fill="#cbd5e1"/>' +
+        '<path d="M20 38C20 24 60 24 60 38C60 46 56 50 54 50H26C24 50 20 46 20 38Z" fill="#e2e8f0"/>' +
+        '<path d="M14 78C16 62 26 56 40 56C54 56 64 62 66 78H14Z" fill="#0284c7"/>' +
+        '<circle cx="40" cy="39" r="15" fill="#fed7aa"/>' +
+        '<circle cx="34" cy="38" r="5" stroke="#0369a1" stroke-width="1.6" fill="#fff" fill-opacity="0.35"/>' +
+        '<circle cx="46" cy="38" r="5" stroke="#0369a1" stroke-width="1.6" fill="#fff" fill-opacity="0.35"/>' +
+        '<line x1="39" y1="38" x2="41" y2="38" stroke="#0369a1" stroke-width="1.6"/>' +
+        '<circle cx="34" cy="38" r="1.4" fill="#1e293b"/><circle cx="46" cy="38" r="1.4" fill="#1e293b"/>' +
+        '<path d="M35 45C37 47.5 43 47.5 45 45" stroke="#b45309" stroke-width="1.8" stroke-linecap="round"/>' +
+      '</svg>';
+    }
+
+    function avatarSVG(color) {
+      return '<svg width="40" height="40" style="border-radius:50%;border:1px solid #bae6fd;flex-shrink:0;" viewBox="0 0 80 80" fill="none">' +
+        '<circle cx="40" cy="40" r="40" fill="#e0f2fe"/>' +
+        '<path d="M16 78C18 62 28 56 40 56C52 56 62 62 64 78H16Z" fill="' + color + '"/>' +
+        '<circle cx="40" cy="39" r="14" fill="#fed7aa"/>' +
+        '<path d="M26 36C26 24 54 24 54 36C50 31 30 31 26 36Z" fill="#1e293b"/>' +
+        '<circle cx="35" cy="39" r="1.5" fill="#1e293b"/><circle cx="45" cy="39" r="1.5" fill="#1e293b"/>' +
+        '<path d="M36 45C38 47 42 47 44 45" stroke="#9a3412" stroke-width="1.6" stroke-linecap="round"/>' +
+      '</svg>';
+    }
+
+    function cctvSceneSVG(room) {
+      if (room === 'หน้าบ้าน') {
+        return '<svg width="100%" height="100%" viewBox="0 0 320 200" preserveAspectRatio="none">' +
+          '<rect width="320" height="200" fill="#bae6fd"/>' +
+          '<circle cx="45" cy="52" r="36" fill="#38bdf8" fill-opacity="0.35"/>' +
+          '<circle cx="275" cy="48" r="40" fill="#0284c7" fill-opacity="0.25"/>' +
+          '<polygon points="85,75 160,32 235,75" fill="#0369a1"/>' +
+          '<rect x="98" y="75" width="124" height="75" fill="#f8fafc"/>' +
+          '<rect x="145" y="102" width="30" height="48" fill="#7dd3fc"/>' +
+          '<polygon points="0,200 95,148 225,148 320,200" fill="#cbd5e1"/>' +
+          '<rect x="0" y="120" width="95" height="32" fill="#e2e8f0"/>' +
+          '<rect x="225" y="120" width="95" height="32" fill="#e2e8f0"/>' +
+          '<rect x="95" y="112" width="130" height="40" stroke="#1e293b" stroke-width="3" fill="rgba(15,23,42,0.1)"/>' +
+          '<line x1="125" y1="112" x2="125" y2="152" stroke="#1e293b" stroke-width="2"/>' +
+          '<line x1="160" y1="112" x2="160" y2="152" stroke="#1e293b" stroke-width="3"/>' +
+          '<line x1="195" y1="112" x2="195" y2="152" stroke="#1e293b" stroke-width="2"/>' +
+        '</svg>';
+      }
+      if (room === 'ห้องนั่งเล่น') {
+        return '<svg width="100%" height="100%" viewBox="0 0 320 200" preserveAspectRatio="none">' +
+          '<rect width="320" height="145" fill="#f0f9ff"/>' +
+          '<rect y="145" width="320" height="55" fill="#e2e8f0"/>' +
+          '<rect x="36" y="28" width="84" height="72" rx="4" fill="#bae6fd" stroke="#fff" stroke-width="4"/>' +
+          '<rect x="95" y="102" width="145" height="46" rx="12" fill="#0284c7"/>' +
+          '<rect x="112" y="108" width="24" height="20" rx="5" fill="#bae6fd"/>' +
+          '<rect x="198" y="108" width="24" height="20" rx="5" fill="#bae6fd"/>' +
+          '<line x1="274" y1="55" x2="274" y2="148" stroke="#64748b" stroke-width="3"/>' +
+          '<polygon points="260,58 288,58 282,36 266,36" fill="#38bdf8"/>' +
+        '</svg>';
+      }
+      return '<svg width="100%" height="100%" viewBox="0 0 320 200" preserveAspectRatio="none">' +
+        '<rect width="320" height="145" fill="#f8fafc"/>' +
+        '<rect y="145" width="320" height="55" fill="#cbd5e1"/>' +
+        '<rect x="30" y="20" width="110" height="48" rx="4" fill="#bae6fd"/>' +
+        '<rect x="180" y="20" width="110" height="48" rx="4" fill="#bae6fd"/>' +
+        '<rect x="45" y="102" width="230" height="48" rx="6" fill="#0284c7"/>' +
+        '<rect x="40" y="96" width="240" height="8" rx="3" fill="#fff"/>' +
+      '</svg>';
+    }
+
+    // State
+    let activeCareId = 1;
+    let periodTab = '7 วัน';
+    let camRoom = 'หน้าบ้าน';
+    let camLive = true;
+    let medConfirmed = false;
+    let zoomedMap = false;
+    let isLargeText = false;
+
+    const caregivers = [
+      { name: 'คุณลูกสาว', role: 'ดูแลทั้งหมด', owner: true, color: '#0ea5e9' },
+      { name: 'คุณหลานชาย', role: 'ดูแลได้บางส่วน', owner: false, color: '#0369a1' },
+      { name: 'ผู้ดูแลใกล้บ้าน', role: 'ดูแลได้บางส่วน', owner: false, color: '#38bdf8' }
+    ];
+
+    const titles = {
+      1: '1. หน้าหลัก Dashboard',
+      2: '2. หน้าข้อมูลสุขภาพ',
+      3: '3. หน้าติดตามตำแหน่ง GPS',
+      4: '4. หน้ากล้องวงจรปิด CCTV',
+      5: '5. หน้าแจ้งเตือนฉุกเฉิน',
+      6: '6. หน้าตารางเตือนยา',
+      7: '7. หน้าจัดการผู้ดูแล',
+      8: '8. หน้าประวัติและรายงาน'
+    };
+
+    function renderCare(id) {
+      activeCareId = id;
+      const body = document.getElementById('care-body');
+      document.getElementById('screen-label').textContent = 'กำลังแสดง: ' + titles[id];
+
+      // Update cards
+      document.querySelectorAll('.feature-card').forEach(c => {
+        c.classList.toggle('selected', Number(c.getAttribute('data-idx')) === id);
+      });
+      // Update bottom tabs
+      document.querySelectorAll('.p-tab').forEach(t => t.classList.remove('active'));
+      const activeNav = document.getElementById('nav-' + id);
+      if (activeNav) activeNav.classList.add('active');
+
+      if (id === 1) {
+        body.innerHTML =
+          '<div class="p-card" style="display:flex;align-items:center;justify-content:space-between;">' +
+            '<div style="display:flex;align-items:center;gap:10px;">' +
+              grandmaSVG(42, 42) +
+              '<div>' +
+                '<div style="font-weight:700;font-size:13px;color:#0f172a;">คุณแม่สมใจ <span style="color:#10b981;">●</span></div>' +
+                '<div style="font-size:11px;color:#0284c7;">เชื่อมต่อแล้ว</div>' +
+              '</div>' +
+            '</div>' +
+            '<button onclick="renderCare(5)" style="width:34px;height:34px;border-radius:50%;border:none;background:#f0f9ff;cursor:pointer;">🔔</button>' +
+          '</div>' +
+          '<div style="background:linear-gradient(135deg,#0ea5e9,#2563eb);color:#fff;padding:13px;border-radius:16px;display:flex;align-items:center;gap:12px;">' +
+            '<div style="width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:18px;">🛡️</div>' +
+            '<div><div style="font-weight:700;font-size:14px;">ปลอดภัย</div><div style="font-size:11px;color:#e0f2fe;">ยังไม่มีการแจ้งเตือนผิดปกติ</div></div>' +
+          '</div>' +
+          '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">' +
+            '<div onclick="renderCare(2)" class="p-card" style="text-align:center;cursor:pointer;">' +
+              '<div style="font-size:15px;">❤️</div><div style="font-weight:800;font-size:16px;margin-top:2px;">78</div><div style="font-size:10px;color:#94a3b8;">BPM</div>' +
+            '</div>' +
+            '<div onclick="renderCare(2)" class="p-card" style="text-align:center;cursor:pointer;">' +
+              '<div style="font-size:15px;">🩸</div><div style="font-weight:800;font-size:14px;margin-top:4px;">120/80</div><div style="font-size:10px;color:#94a3b8;">mmHg</div>' +
+            '</div>' +
+            '<div onclick="renderCare(2)" class="p-card" style="text-align:center;cursor:pointer;">' +
+              '<div style="font-size:15px;">💧</div><div style="font-weight:800;font-size:16px;margin-top:2px;">98%</div><div style="font-size:10px;color:#94a3b8;">SpO₂</div>' +
+            '</div>' +
+          '</div>' +
+          '<div onclick="renderCare(3)" class="p-card" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;">' +
+            '<div style="display:flex;align-items:center;gap:10px;">' +
+              '<div style="width:36px;height:36px;border-radius:10px;background:#f0f9ff;display:flex;align-items:center;justify-content:center;">📍</div>' +
+              '<div><div style="font-size:10px;color:#94a3b8;">ตำแหน่งล่าสุด</div><div style="font-weight:700;font-size:12px;">ที่บ้าน (บ้านเลขที่ 99)</div></div>' +
+            '</div>' +
+            '<span style="font-size:11px;color:#0284c7;font-weight:600;">10:35 น. ›</span>' +
+          '</div>' +
+          '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">' +
+            '<button onclick="renderCare(4)" class="p-card" style="cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;font-family:inherit;">' +
+              '<span style="font-size:16px;">📹</span><span style="font-size:10px;font-weight:700;">กล้อง CCTV</span>' +
+            '</button>' +
+            '<button onclick="renderCare(6)" class="p-card" style="cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;font-family:inherit;">' +
+              '<span style="font-size:16px;">💊</span><span style="font-size:10px;font-weight:700;">แจ้งเตือนยา</span>' +
+            '</button>' +
+            '<button onclick="renderCare(5)" class="p-card" style="cursor:pointer;border-color:#ffe4e6;display:flex;flex-direction:column;align-items:center;gap:5px;font-family:inherit;">' +
+              '<span style="background:#f43f5e;color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:6px;">SOS</span><span style="font-size:10px;font-weight:700;color:#e11d48;">ฉุกเฉิน</span>' +
+            '</button>' +
+          '</div>';
+      } else if (id === 2) {
+        const d = periodTab === '7 วัน'
+          ? { hr: '78 BPM ↑+2', bp: '120/80 mmHg', spo2: '98%', line: 'M0 36 Q40 26, 80 32 T160 22 L240 25' }
+          : periodTab === '30 วัน'
+          ? { hr: '76 BPM คงที่', bp: '118/79 mmHg', spo2: '99%', line: 'M0 30 Q45 34, 90 27 T180 29 L240 24' }
+          : { hr: '77 BPM ปกติ', bp: '121/80 mmHg', spo2: '98%', line: 'M0 34 Q50 24, 100 29 T190 21 L240 23' };
+        body.innerHTML =
+          '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+            '<button onclick="renderCare(1)" style="border:none;background:none;color:#0284c7;font-weight:700;font-size:12px;cursor:pointer;font-family:inherit;">‹ กลับ</button>' +
+            '<strong style="font-size:14px;">ข้อมูลสุขภาพ</strong><span style="width:28px;"></span>' +
+          '</div>' +
+          '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:#fff;padding:4px;border-radius:12px;border:1px solid #e2e8f0;">' +
+            ['7 วัน', '30 วัน', 'ทั้งหมด'].map(p =>
+              '<button onclick="periodTab=\'' + p + '\';renderCare(2)" style="border:none;padding:6px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;' +
+              (periodTab === p ? 'background:#0284c7;color:#fff;' : 'background:transparent;color:#64748b;') + '">' + p + '</button>'
+            ).join('') +
+          '</div>' +
+          '<div class="p-card">' +
+            '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">' +
+              '<div><div style="font-size:10px;color:#94a3b8;">ชีพจรเฉลี่ย (' + periodTab + ')</div><div style="font-weight:800;font-size:15px;">' + d.hr + '</div></div>' +
+              '<span>❤️</span>' +
+            '</div>' +
+            '<svg width="100%" height="55" viewBox="0 0 240 55">' +
+              '<path d="' + d.line + ' L240 55 L0 55 Z" fill="rgba(244,63,94,0.12)"/>' +
+              '<path d="' + d.line + '" fill="none" stroke="#f43f5e" stroke-width="2.5" stroke-linecap="round"/>' +
+            '</svg>' +
+            '<div style="display:flex;justify-content:space-between;font-size:9px;color:#94a3b8;"><span>จ.</span><span>อ.</span><span>พ.</span><span>พฤ.</span><span>ศ.</span><span>ส.</span><span>อา.</span></div>' +
+          '</div>' +
+          '<div class="p-card">' +
+            '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">' +
+              '<div><div style="font-size:10px;color:#94a3b8;">ความดันเฉลี่ย</div><div style="font-weight:800;font-size:15px;">' + d.bp + '</div></div>' +
+              '<span>🩸</span>' +
+            '</div>' +
+            '<svg width="100%" height="40" viewBox="0 0 240 40">' +
+              '<path d="M0 24 Q50 16, 100 22 T190 18 L240 20" fill="none" stroke="#0284c7" stroke-width="2.5" stroke-linecap="round"/>' +
+            '</svg>' +
+          '</div>' +
+          '<div class="p-card" style="display:flex;justify-content:space-between;align-items:center;">' +
+            '<div><div style="font-size:10px;color:#94a3b8;">ออกซิเจนในเลือด</div><div style="font-weight:800;font-size:14px;">' + d.spo2 + '</div></div>' +
+            '<span style="background:#f0f9ff;color:#0284c7;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;">เกณฑ์ปกติ</span>' +
+          '</div>';
+      } else if (id === 3) {
+        body.innerHTML =
+          '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+            '<button onclick="renderCare(1)" style="border:none;background:none;color:#0284c7;font-weight:700;font-size:12px;cursor:pointer;font-family:inherit;">‹ กลับ</button>' +
+            '<strong style="font-size:14px;">ติดตามตำแหน่ง</strong><span style="width:28px;"></span>' +
+          '</div>' +
+          '<div style="text-align:center;"><span style="background:#fff;border:1px solid #e2e8f0;font-size:10px;color:#64748b;padding:3px 12px;border-radius:999px;">อัปเดตล่าสุด: 10:35 น.</span></div>' +
+          '<div style="position:relative;height:245px;border-radius:18px;border:1px solid #bae6fd;overflow:hidden;background:#e0f2fe;">' +
+            '<svg width="100%" height="100%" style="transition:transform 0.4s;transform:' + (zoomedMap ? 'scale(1.25)' : 'scale(1)') + ';" viewBox="0 0 320 250">' +
+              '<rect width="320" height="250" fill="#e0f2fe"/>' +
+              '<rect x="16" y="16" width="90" height="70" rx="12" fill="#bae6fd"/>' +
+              '<path d="M265 0 Q245 120 285 250" stroke="#7dd3fc" stroke-width="18" fill="none"/>' +
+              '<path d="M0 95 L320 125" stroke="#fff" stroke-width="14"/>' +
+              '<path d="M125 0 L150 250" stroke="#fff" stroke-width="14"/>' +
+              '<path d="M0 190 L320 170" stroke="#fff" stroke-width="11"/>' +
+              '<circle cx="145" cy="115" r="62" fill="rgba(14,165,233,0.16)" stroke="#0284c7" stroke-width="1.8" stroke-dasharray="5 4"/>' +
+            '</svg>' +
+            '<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;margin-top:-14px;">' +
+              '<div style="background:#fff;padding:3px;border-radius:50%;box-shadow:0 6px 16px rgba(0,0,0,0.15);border:2px solid #0284c7;">' + grandmaSVG(42, 42) + '</div>' +
+              '<div style="margin-top:6px;background:#fff;padding:4px 10px;border-radius:10px;font-size:10px;font-weight:700;color:#0c4a6e;box-shadow:0 4px 10px rgba(0,0,0,0.08);">🛡️ พื้นที่ปลอดภัย (บ้าน)</div>' +
+            '</div>' +
+            '<button onclick="zoomedMap=!zoomedMap;renderCare(3)" style="position:absolute;bottom:10px;right:10px;background:#fff;border:1px solid #bae6fd;color:#0369a1;font-size:11px;font-weight:700;padding:5px 10px;border-radius:10px;cursor:pointer;font-family:inherit;">' + (zoomedMap ? 'ซูมออก -' : 'ซูมเข้า +') + '</button>' +
+          '</div>' +
+          '<div class="p-card" style="display:flex;align-items:center;justify-content:space-between;">' +
+            '<div><div style="font-size:10px;color:#94a3b8;">ตำแหน่งปัจจุบัน</div><div style="font-weight:700;font-size:12px;">📍 บ้านเลขที่ 99</div></div>' +
+            '<button onclick="openNavModal()" class="p-btn p-btn-sky" style="width:auto;padding:8px 14px;">ดูเส้นทาง</button>' +
+          '</div>';
+      } else if (id === 4) {
+        body.innerHTML =
+          '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+            '<button onclick="renderCare(1)" style="border:none;background:none;color:#0284c7;font-weight:700;font-size:12px;cursor:pointer;font-family:inherit;">‹ กลับ</button>' +
+            '<strong style="font-size:14px;">กล้องวงจรปิด</strong><span style="width:28px;"></span>' +
+          '</div>' +
+          '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">' +
+            ['หน้าบ้าน', 'ห้องนั่งเล่น', 'ห้องครัว'].map(r =>
+              '<button onclick="camRoom=\'' + r + '\';renderCare(4)" style="padding:7px 4px;border-radius:10px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;' +
+              (camRoom === r ? 'background:#0284c7;color:#fff;border:1px solid #0284c7;' : 'background:#fff;color:#475569;border:1px solid #e2e8f0;') + '">' + r + '</button>'
+            ).join('') +
+          '</div>' +
+          '<div style="position:relative;height:205px;border-radius:16px;overflow:hidden;border:1px solid #bae6fd;background:#0f172a;">' +
+            '<div style="width:100%;height:100%;opacity:' + (camLive ? '1' : '0.55') + ';">' + cctvSceneSVG(camRoom) + '</div>' +
+            '<div style="position:absolute;top:10px;left:10px;right:10px;display:flex;justify-content:space-between;align-items:center;">' +
+              '<span style="background:#e11d48;color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:999px;">● ' + (camLive ? 'LIVE' : 'PAUSED') + ' • ' + camRoom + '</span>' +
+              '<span style="background:rgba(15,23,42,0.75);color:#fff;font-size:10px;padding:2px 7px;border-radius:6px;">10:35:18</span>' +
+            '</div>' +
+            '<button onclick="camLive=!camLive;renderCare(4);showToast(camLive?\'ถ่ายทอดสดกล้อง\'+camRoom:\'หยุดภาพชั่วคราว\')" style="position:absolute;inset:0;margin:auto;width:46px;height:46px;border-radius:50%;border:none;background:rgba(15,23,42,0.65);color:#fff;font-size:16px;cursor:pointer;">' + (camLive ? '❚❚' : '▶') + '</button>' +
+            '<div style="position:absolute;bottom:8px;left:10px;right:10px;background:rgba(255,255,255,0.85);padding:4px 10px;border-radius:8px;display:flex;justify-content:space-between;font-size:10px;font-weight:700;">' +
+              '<span>Full HD 1080p</span><span onclick="showToast(\'บันทึกภาพหน้าจอกล้อง\'+camRoom+\'แล้ว 📸\')" style="color:#0284c7;cursor:pointer;">📸 ถ่ายภาพ</span>' +
+            '</div>' +
+          '</div>' +
+          '<button onclick="showToast(\'เปิดดูวิดีโอย้อนหลัง 24 ชั่วโมง 🕒\')" class="p-btn p-btn-soft">🕒 ดูย้อนหลัง</button>';
+      } else if (id === 5) {
+        body.innerHTML =
+          '<div style="background:linear-gradient(180deg,#fff1f2 0%,#ffffff 100%);margin:-14px;padding:18px;min-height:100%;display:flex;flex-direction:column;justify-content:space-between;text-align:center;">' +
+            '<div style="padding-top:16px;">' +
+              '<div style="width:68px;height:68px;margin:0 auto 12px;border-radius:50%;background:#ffe4e6;display:flex;align-items:center;justify-content:center;">' +
+                '<div style="width:48px;height:48px;border-radius:50%;background:#f43f5e;color:#fff;font-size:26px;font-weight:800;display:flex;align-items:center;justify-content:center;">!</div>' +
+              '</div>' +
+              '<div style="font-size:11px;font-weight:800;color:#e11d48;letter-spacing:0.1em;">EMERGENCY ALERT</div>' +
+              '<h4 style="font-size:20px;font-weight:800;color:#0f172a;margin:8px 0;">ตรวจพบเหตุการณ์<br/>อาจเกิดการล้ม</h4>' +
+              '<div style="background:#fff1f2;border:1px solid #ffe4e6;border-radius:14px;padding:10px;font-size:12px;color:#334155;">' +
+                '<div>เวลา <strong>14:25 น.</strong></div>' +
+                '<div style="margin-top:3px;">📍 ตำแหน่ง: <strong>บริเวณบ้าน</strong></div>' +
+              '</div>' +
+            '</div>' +
+            '<div style="display:flex;flex-direction:column;gap:8px;padding-bottom:10px;">' +
+              '<button onclick="renderCare(3)" class="p-btn p-btn-rose" style="padding:12px;">ดูรายละเอียดและตำแหน่ง</button>' +
+              '<button onclick="openCallModal(\'คุณแม่สมใจ และผู้ดูแล\')" class="p-btn p-btn-soft" style="padding:11px;">📞 โทรหาผู้ดูแล</button>' +
+            '</div>' +
+          '</div>';
+      } else if (id === 6) {
+        body.innerHTML =
+          '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+            '<button onclick="renderCare(1)" style="border:none;background:none;color:#0284c7;font-weight:700;font-size:12px;cursor:pointer;font-family:inherit;">‹ กลับ</button>' +
+            '<strong style="font-size:14px;">แจ้งเตือนยา</strong><span style="width:28px;"></span>' +
+          '</div>' +
+          '<div style="text-align:center;"><span style="background:#fff;border:1px solid #e2e8f0;font-size:10px;color:#64748b;padding:3px 12px;border-radius:999px;">วันนี้ • 19 พ.ย. 2568</span></div>' +
+          '<div class="p-card">' +
+            '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">' +
+              '<div style="width:38px;height:38px;border-radius:10px;background:#f0f9ff;display:flex;align-items:center;justify-content:center;">💊</div>' +
+              '<div><div style="font-weight:700;font-size:13px;">ยาความดัน</div><div style="font-size:11px;color:#94a3b8;">เวลา 08:00 น.</div></div>' +
+            '</div>' +
+            '<div style="background:#f0f9ff;color:#0369a1;font-size:12px;font-weight:700;padding:8px;border-radius:10px;text-align:center;">✓ รับประทานแล้ว</div>' +
+          '</div>' +
+          '<div class="p-card">' +
+            '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">' +
+              '<div style="width:38px;height:38px;border-radius:10px;background:#fffbeb;display:flex;align-items:center;justify-content:center;">💊</div>' +
+              '<div><div style="font-weight:700;font-size:13px;">ยาลดไขมัน</div><div style="font-size:11px;color:#94a3b8;">เวลา 20:00 น.</div></div>' +
+            '</div>' +
+            '<button onclick="toggleMedSync()" class="p-btn ' + (medConfirmed ? 'p-btn-sky' : '') + '" style="' + (medConfirmed ? '' : 'background:#fffbeb;color:#b45309;border:1px solid #fde68a;') + '">' +
+              (medConfirmed ? '✓ รับประทานแล้ว' : '🔔 รอการยืนยัน (คลิกเพื่ออัปเดต)') +
+            '</button>' +
+          '</div>';
+      } else if (id === 7) {
+        body.innerHTML =
+          '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+            '<button onclick="renderCare(1)" style="border:none;background:none;color:#0284c7;font-weight:700;font-size:12px;cursor:pointer;font-family:inherit;">‹ กลับ</button>' +
+            '<strong style="font-size:14px;">จัดการผู้ดูแล</strong><span style="width:28px;"></span>' +
+          '</div>' +
+          caregivers.map(cg =>
+            '<div class="p-card" style="display:flex;align-items:center;justify-content:space-between;">' +
+              '<div style="display:flex;align-items:center;gap:10px;">' +
+                avatarSVG(cg.color) +
+                '<div><div style="font-weight:700;font-size:12px;">' + cg.name + '</div><div style="font-size:10px;color:#94a3b8;">' + cg.role + '</div></div>' +
+              '</div>' +
+              (cg.owner ? '<span style="background:#0284c7;color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:999px;">เจ้าของบัญชี</span>' : '<span style="font-size:10px;color:#0284c7;font-weight:600;">เชื่อมต่อแล้ว</span>') +
+            '</div>'
+          ).join('') +
+          '<button onclick="openAddCgModal()" class="p-btn p-btn-sky" style="margin-top:4px;padding:12px;">+ เพิ่มผู้ดูแล</button>';
+      } else if (id === 8) {
+        body.innerHTML =
+          '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+            '<button onclick="renderCare(1)" style="border:none;background:none;color:#0284c7;font-weight:700;font-size:12px;cursor:pointer;font-family:inherit;">‹ กลับ</button>' +
+            '<strong style="font-size:14px;">ประวัติและรายงาน</strong><span style="width:28px;"></span>' +
+          '</div>' +
+          '<div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #e2e8f0;text-align:center;font-size:12px;font-weight:700;">' +
+            '<div style="padding-bottom:6px;border-bottom:2px solid #0284c7;color:#0284c7;">สุขภาพ</div>' +
+            '<div onclick="showToast(\'ไม่พบเหตุฉุกเฉินในรอบสัปดาห์ ✓\')" style="padding-bottom:6px;color:#94a3b8;cursor:pointer;">เหตุการณ์</div>' +
+          '</div>' +
+          '<div class="p-card">' +
+            '<div style="display:flex;align-items:flex-end;justify-content:space-between;height:90px;padding:8px 8px 0;">' +
+              [48, 68, 84, 62, 88, 95, 70].map(h =>
+                '<div style="width:11px;height:' + h + '%;background:linear-gradient(180deg,#38bdf8,#0284c7);border-radius:999px;"></div>'
+              ).join('') +
+            '</div>' +
+            '<div style="display:flex;justify-content:space-between;font-size:9px;color:#94a3b8;padding:6px 6px 0;"><span>จ.</span><span>อ.</span><span>พ.</span><span>พฤ.</span><span>ศ.</span><span>ส.</span><span>อา.</span></div>' +
+          '</div>' +
+          '<div class="p-card" style="display:flex;flex-direction:column;gap:8px;font-size:12px;">' +
+            '<div style="font-weight:700;">สรุปสุขภาพรายสัปดาห์</div>' +
+            '<div style="display:flex;justify-content:space-between;"><span>✓ ชีพจรปกติ</span><strong>6 วัน</strong></div>' +
+            '<div style="display:flex;justify-content:space-between;"><span>✓ ความดันปกติ</span><strong>5 วัน</strong></div>' +
+            '<div style="display:flex;justify-content:space-between;"><span>✓ ไม่มีเหตุฉุกเฉิน</span><strong style="color:#0284c7;">ปกติ</strong></div>' +
+          '</div>' +
+          '<button onclick="openReportModal()" class="p-btn p-btn-soft">📄 ดาวน์โหลดรายงาน</button>';
+      }
+    }
+
+    function jumpToScreen(id) {
+      renderCare(id);
+      document.getElementById('care-app').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function toggleMedSync() {
+      medConfirmed = !medConfirmed;
+      const sBtn = document.getElementById('senior-med-btn');
+      if (medConfirmed) {
+        sBtn.style.background = '#0284c7';
+        sBtn.style.color = '#ffffff';
+        sBtn.style.border = 'none';
+        sBtn.textContent = '✓ รับประทานแล้ว (แจ้งเตือนลูกหลานแล้ว)';
+        showToast('บันทึกการทานยาลดไขมัน และซิงก์ข้อมูลเรียบร้อย ✓');
+      } else {
+        sBtn.style.background = '#fffbeb';
+        sBtn.style.color = '#b45309';
+        sBtn.style.border = '2px solid #fde68a';
+        sBtn.textContent = '🕒 รอการยืนยัน (กดเพื่อยืนยัน)';
+        showToast('เปลี่ยนสถานะกลับเป็นรอการยืนยัน');
+      }
+      if (activeCareId === 6) renderCare(6);
+    }
+
+    function toggleLargeText() {
+      isLargeText = !isLargeText;
+      document.getElementById('senior-wrapper').classList.toggle('large-font-mode', isLargeText);
+      showToast(isLargeText ? 'เปิดโหมดตัวอักษรใหญ่พิเศษแล้ว 🔍' : 'ปรับขนาดตัวอักษรกลับเป็นปกติ');
+    }
+
+    // Modals
+    function triggerEmergencyDemo() {
+      renderCare(5);
+      openModal(
+        '<div style="text-align:center;">' +
+          '<div style="width:60px;height:60px;margin:0 auto 12px;border-radius:50%;background:#ffe4e6;color:#e11d48;font-size:28px;font-weight:800;display:flex;align-items:center;justify-content:center;">!</div>' +
+          '<div style="font-size:11px;font-weight:800;color:#e11d48;letter-spacing:0.08em;">SMARTORA EMERGENCY ALERT</div>' +
+          '<h3 style="font-size:19px;font-weight:700;margin:8px 0;">จำลองการแจ้งเตือนฉุกเฉินเรียลไทม์</h3>' +
+          '<p style="font-size:13px;color:#475569;margin-bottom:16px;">ตรวจพบแรงกระแทกคล้ายการหกล้มของคุณแม่สมใจ เวลา <strong>14:25 น.</strong> ณ บริเวณบ้าน ระบบได้ส่งแจ้งเตือนไปยังผู้ดูแลทุกคนทันที</p>' +
+          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">' +
+            '<button onclick="closeModal();document.getElementById(\'care-app\').scrollIntoView({behavior:\'smooth\'});" class="p-btn p-btn-rose" style="padding:12px;">ดูบนหน้าจอแอป</button>' +
+            '<button onclick="closeModal()" class="p-btn p-btn-soft" style="padding:12px;">ปิดหน้าต่าง</button>' +
+          '</div>' +
+        '</div>'
+      );
+    }
+
+    function openCallModal(name) {
+      openModal(
+        '<div style="text-align:center;">' +
+          '<div style="font-size:40px;margin-bottom:8px;">📞</div>' +
+          '<div style="font-size:11px;font-weight:700;color:#0284c7;">SMARTORA VOICE CALL</div>' +
+          '<h3 style="font-size:19px;font-weight:700;margin:6px 0;">กำลังโทรออกหา ' + name + '</h3>' +
+          '<p style="font-size:13px;color:#64748b;margin-bottom:18px;">กำลังเชื่อมต่อสัญญาณเสียงความคมชัดสูง...</p>' +
+          '<button onclick="closeModal();showToast(\'วางสายเรียบร้อย\')" class="p-btn p-btn-rose" style="padding:12px;">วางสาย</button>' +
+        '</div>'
+      );
+    }
+
+    function openMessageModal() {
+      openModal(
+        '<div>' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">' +
+            '<h3 style="font-size:17px;font-weight:700;">💬 ข้อความจากลูกหลาน</h3>' +
+            '<button onclick="closeModal()" style="border:none;background:none;font-size:18px;cursor:pointer;">✕</button>' +
+          '</div>' +
+          '<div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:16px;padding:14px;margin-bottom:14px;">' +
+            '<div style="font-size:11px;font-weight:700;color:#0369a1;margin-bottom:4px;">คุณลูกสาว • 10:15 น.</div>' +
+            '<p style="font-size:14px;color:#0f172a;">“คุณแม่ขา อย่าลืมทานยาลดไขมันหลังอาหารเย็นนะคะ ตอนเย็นหนูแวะเข้าไปหาค่ะ 💙”</p>' +
+          '</div>' +
+          '<button onclick="closeModal();showToast(\'ส่งข้อความตอบกลับ: รับทราบจ้าลูก ❤️\')" class="p-btn p-btn-sky" style="padding:12px;">ตอบกลับด่วน “รับทราบจ้าลูก ❤️”</button>' +
+        '</div>'
+      );
+    }
+
+    function openNavModal() {
+      openModal(
+        '<div>' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">' +
+            '<h3 style="font-size:17px;font-weight:700;">🗺️ นำทางไปยังตำแหน่งคุณแม่</h3>' +
+            '<button onclick="closeModal()" style="border:none;background:none;font-size:18px;cursor:pointer;">✕</button>' +
+          '</div>' +
+          '<div style="background:#f0f9ff;border-radius:14px;padding:14px;font-size:13px;color:#334155;margin-bottom:14px;">' +
+            '<div><strong>ปลายทาง:</strong> บ้านเลขที่ 99 (พื้นที่ปลอดภัย)</div>' +
+            '<div style="margin-top:4px;"><strong>ระยะทาง:</strong> 3.4 กม. (ใช้เวลาประมาณ 8 นาที)</div>' +
+          '</div>' +
+          '<button onclick="closeModal();showToast(\'เริ่มนำทางไปยังบ้านเลขที่ 99 🚗\')" class="p-btn p-btn-sky" style="padding:12px;">เริ่มนำทางทันที</button>' +
+        '</div>'
+      );
+    }
+
+    function openAddCgModal() {
+      openModal(
+        '<div>' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">' +
+            '<h3 style="font-size:17px;font-weight:700;">+ เพิ่มผู้ดูแลใหม่</h3>' +
+            '<button onclick="closeModal()" style="border:none;background:none;font-size:18px;cursor:pointer;">✕</button>' +
+          '</div>' +
+          '<div style="margin-bottom:10px;">' +
+            '<label style="font-size:12px;font-weight:700;display:block;margin-bottom:4px;">ชื่อผู้ดูแล</label>' +
+            '<input id="cg-name-input" type="text" value="คุณลูกชายคนเล็ก" style="width:100%;padding:10px;border-radius:12px;border:1px solid #cbd5e1;font-family:inherit;font-size:13px;"/>' +
+          '</div>' +
+          '<div style="margin-bottom:14px;">' +
+            '<label style="font-size:12px;font-weight:700;display:block;margin-bottom:4px;">สิทธิ์การเข้าถึง</label>' +
+            '<select id="cg-role-input" style="width:100%;padding:10px;border-radius:12px;border:1px solid #cbd5e1;font-family:inherit;font-size:13px;">' +
+              '<option value="ดูแลได้บางส่วน">ดูแลได้บางส่วน</option>' +
+              '<option value="ดูแลทั้งหมด">ดูแลทั้งหมด</option>' +
+            '</select>' +
+          '</div>' +
+          '<button onclick="saveNewCg()" class="p-btn p-btn-sky" style="padding:12px;">บันทึกและส่งคำเชิญ</button>' +
+        '</div>'
+      );
+    }
+
+    function saveNewCg() {
+      const n = document.getElementById('cg-name-input').value.trim();
+      const r = document.getElementById('cg-role-input').value;
+      if (!n) return;
+      caregivers.push({ name: n, role: r, owner: false, color: '#0284c7' });
+      closeModal();
+      renderCare(7);
+      showToast('เพิ่ม "' + n + '" เป็นผู้ดูแลเรียบร้อย ✓');
+    }
+
+    function openReportModal() {
+      openModal(
+        '<div>' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">' +
+            '<h3 style="font-size:17px;font-weight:700;">📄 รายงานสรุปสุขภาพประจำสัปดาห์</h3>' +
+            '<button onclick="closeModal()" style="border:none;background:none;font-size:18px;cursor:pointer;">✕</button>' +
+          '</div>' +
+          '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:14px;font-size:13px;color:#334155;margin-bottom:14px;line-height:1.7;">' +
+            '<div style="font-weight:700;color:#0369a1;margin-bottom:4px;">ผู้รับการดูแล: คุณแม่สมใจ</div>' +
+            '<div>• ชีพจรเฉลี่ย: <strong>78 BPM</strong> (ปกติ 6/7 วัน)</div>' +
+            '<div>• ความดันโลหิตเฉลี่ย: <strong>120/80 mmHg</strong> (ปกติ 5/7 วัน)</div>' +
+            '<div>• ออกซิเจนในเลือด (SpO₂): <strong>98%</strong></div>' +
+            '<div>• ประวัติเหตุฉุกเฉิน/หกล้ม: <strong>0 ครั้ง</strong></div>' +
+          '</div>' +
+          '<button onclick="closeModal();showToast(\'บันทึกรายงานสุขภาพสำเร็จ ✓\')" class="p-btn p-btn-sky" style="padding:12px;">บันทึกรายงานส่งแพทย์</button>' +
+        '</div>'
+      );
+    }
+
+    // Boot
+    renderCare(1);
+  </script>
+</body>
+</html>
+"""
+
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("Generated index.html successfully! Size:", len(html_content), "bytes")
